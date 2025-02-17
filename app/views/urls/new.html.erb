@@ -1,2 +1,8 @@
-<h1>Urls#new</h1>
-<p>Find me in app/views/urls/new.html.erb</p>
+<h1>urlの新規登録</h1>
+
+<%=form_tag("/urls/create") do%>
+
+<textarea  cols="150"></textarea>
+
+<input type="submit" value="url新規登録">
+<%end%>
