@@ -7,15 +7,14 @@ Rails.application.routes.draw do
   post "users/:id/destroy" => "users#destroy"
   get "users/:id" => "users#show"
 
-  post "urls/create" => "urls#create"
   get "urls/index" => "urls#index"
   get "urls/new" => "urls#new"
-  post "urls/:id/destroy" => "urls#destroy"
-  post "urls/:id/update" => "urls#update"
+  post "urls/create" => "urls#create"
   get "urls/:id/edit" => "urls#edit"
+  post "urls/:id/update" => "urls#update"
+  post "urls/:id/destroy" => "urls#destroy"
   get "urls/:id" => "urls#show"
 
   get "/" => "home#top"
   get "/about" => "home#about"
-  get "users/index" => "users#index"
 end
