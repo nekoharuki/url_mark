@@ -1,10 +1,10 @@
 <h1>URLの一覧</h1>
 
 <% @urls.each do |url| %>
-  <%=link_to(url.name,url.url)%>
-  <%=link_to("詳細へ","/urls/#{url.id}")%>
+  <%= link_to(url.name, url.url) %>
+  <%= link_to("詳細へ", "/urls/#{url.id}") %>
   <br>
   <br>
 <% end %>
 
-<%=link_to("新規登録","/urls/new")%>
+<%= link_to("URL新規登録", "/urls/new") %>

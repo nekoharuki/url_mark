@@ -22,7 +22,7 @@ class UrlsController < ApplicationController
   @url=Url.find_by(id: params[:id])
   end
   def create
-    @url=Url.new(url: params[:url], name: params[:name], user_id: 1)
+    @url=Url.new(url: params[:url], name: params[:name], user_id: 6)
     if @url.save
       redirect_to("/urls/index")
     else

@@ -1,10 +1,21 @@
 <h1>URLの詳細</h1>
 
-  <p>タイトル:<%= @url.name %></p>
-  <p>url:<%= @url.url %></p>
+<div>
+  <label for="name">URLのタイトル:</label>
+  <%= @url.name %>
+</div>
 
-<%=link_to("編集","/urls/#{@url.id}/edit")%>
-<%=link_to("削除","/urls/#{@url.id}/destroy",data: { turbo_method: "post" }) %>  
+<br>
+
+<div>
+  <label for="url">URL:</label>
+  <%= @url.url %>
+</div>
+
+<br>
+
+<%= link_to("編集", "/urls/#{@url.id}/edit") %>
+<%= link_to("削除", "/urls/#{@url.id}/destroy", data: { turbo_method: "post" }) %>
 <br>
 <br>
-<%=link_to("一覧へ戻る","/urls/index")%>
+<%= link_to("一覧へ", "/urls/index") %>

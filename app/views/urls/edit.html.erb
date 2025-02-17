@@ -1,13 +1,23 @@
-<h1>urlの編集</h1>
+<h1>URLの新規登録</h1>
 
-<%=form_tag("/urls/#{@url.id}/update") do%>
+<%= form_tag("/urls/#{@url.id}/update") do %>
 
-urlのタイトル:
-<input type="text" name="name" value="<%=@url.name%>" >
+  <div>
+    <label for="name">URLのタイトル:</label>
+    <input type="text" name="name" id="name" title="タイトルを入力してください" placeholder="タイトル" value="<%= @url.name %>" required>
+  </div>
+
+  <br>
+
+  <div>
+    <label for="url">URL:</label>
+    <textarea name="url" id="url" title="URLを入力してください" placeholder="URL" cols="150"><%= @url.url %></textarea>
+  </div>
+
+  <br>
+
+  <input type="submit" value="URL編集">
+<% end %>
+
 <br>
-<br>
-<textarea name="url"  cols="150" ><%=@url.url%></textarea>
-
-<input type="submit" value="url編集">
-<%end%>
-
+<%= link_to("一覧へ", "/urls/index") %>
