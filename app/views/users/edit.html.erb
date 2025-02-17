@@ -1,0 +1,14 @@
+<h1>ユーザー編集</h1>
+<%=form_tag("/users/#{@user.id}/update") do%>
+名前:
+<input name="name" type="text" value="<%=@user.name%>">
+<br>
+email:
+<input name="email" type="email" value="<%=@user.email%>">
+<br>
+password:
+<input name="password" type="password" value="<%=@user.password%>">
+<br>
+
+<input type="submit" value="ユーザー新規登録">
+<%end%>

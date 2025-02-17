@@ -1,0 +1,23 @@
+<h1>ユーザー詳細</h1>
+
+<div>
+  <label>名前:</label>
+  <%= @user.name %>
+</div>
+<br>
+<div>
+  <label>メールアドレス:</label>
+  <%= @user.email %>
+</div>
+<br>
+<div>
+  <label>パスワード:</label>
+  <%= @user.password %>
+</div>
+<br>
+
+<%= link_to("編集", "/users/#{@user.id}/edit") %>
+<%= link_to("削除", "/users/#{@user.id}/destroy", data: { turbo_method: "post" }) %>
+<br>
+<br>
+<%= link_to("一覧へ", "/users/index") %>

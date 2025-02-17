@@ -1,0 +1,20 @@
+<h1>ユーザー新規登録</h1>
+<%=form_tag("/users/create") do%>
+
+  <div>
+    <label for="name">名前:</label>
+    <input type="text"  name="name" id="name"  title="名前を入力してください"  placeholder="名前" required>
+  </div>
+  <br>
+  <div>
+    <label for="email">メールアドレス:</label>
+    <input type="email"  name="email" id="email"  title="メールアドレスを入力してください"  placeholder="メールアドレス" required>
+  </div>
+    <br>
+  <div>
+    <label for="password">パスワード:</label>
+    <input type="password"  name="password" id="password"  title="パスワードを入力してください"  placeholder="パスワード" required>
+  </div>
+<br>
+<input type="submit" value="ユーザー新規登録">
+<%end%>
