@@ -1,2 +1,13 @@
-<h1>Urls#edit</h1>
-<p>Find me in app/views/urls/edit.html.erb</p>
+<h1>urlの編集</h1>
+
+<%=form_tag("/urls/#{@url.id}/update") do%>
+
+urlのタイトル:
+<input type="text" name="name" value="<%=@url.name%>" >
+<br>
+<br>
+<textarea name="url"  cols="150" ><%=@url.url%></textarea>
+
+<input type="submit" value="url編集">
+<%end%>
+

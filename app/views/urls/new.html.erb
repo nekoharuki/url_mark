@@ -2,7 +2,11 @@
 
 <%=form_tag("/urls/create") do%>
 
-<textarea  cols="150"></textarea>
+urlのタイトル:
+<input type="text" name="name" >
+<br>
+<br>
+<textarea name="url"  cols="150"></textarea>
 
 <input type="submit" value="url新規登録">
 <%end%>
