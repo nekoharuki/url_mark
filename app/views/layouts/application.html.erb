@@ -15,15 +15,23 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <ul>
+      <li><%= link_to("ホーム", "/") %></li>
+      <li><%= link_to("このアプリについて", "/about") %></li>
+      <li><%= link_to("ユーザー新規登録", "/users/new") %></li>
+      <li><%= link_to("URL新規登録", "/urls/new") %></li>
+      <li><%= link_to("ユーザー一覧", "/users/index") %></li>
+      <li><%= link_to("URL一覧", "/urls/index") %></li>
+    </ul>
   </head>
 
   <body>
-    <%if flash[:notice]%>
-    <%=flash[:notice]%>
-    <%end%>
-    <%if flash[:alert]%>
-    <%=flash[:alert]%>
-    <%end%>
+    <% if flash[:notice] %>
+      <%= flash[:notice] %>
+    <% end %>
+    <% if flash[:alert] %>
+      <%= flash[:alert] %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
