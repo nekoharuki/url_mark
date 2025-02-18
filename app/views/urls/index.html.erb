@@ -1,8 +1,9 @@
 <h1>URLの一覧</h1>
 
 <% @urls.each do |url| %>
-  <%= link_to(url.name, url.url) %>
+  <%= link_to(url.name,"/urls/#{url.id}/cnt",data: { turbo_method: "post" }) %>
   <%= link_to("詳細へ", "/urls/#{url.id}") %>
+
   <br>
   <br>
 <% end %>

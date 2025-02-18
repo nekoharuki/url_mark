@@ -1,52 +1,61 @@
 class UrlsController < ApplicationController
-  before_action :now_logout_check
+  # before_action :now_logout_check
+
   def index
-    @urls=Url.all
+    @urls = Url.all
   end
 
   def new
-    @url=Url.new
+    @url = Url.new
   end
 
   def edit
-    @url=Url.find_by(id: params[:id])
+    @url = Url.find_by(id: params[:id])
   end
 
   def update
-    @url=Url.find_by(id: params[:id])
-    @url.name=params[:name]
-    @url.url=params[:url]
+    @url = Url.find_by(id: params[:id])
+    @url.name = params[:name]
+    @url.url = params[:url]
     if @url.save
-      flash[:notice]="URLを編集しました"
-    redirect_to("/urls/#{@url.id}")
+      flash[:notice] = "URLを編集しました"
+      redirect_to("/urls/#{@url.id}")
     else
-      flash[:alert]="URLの編集に失敗しました"
+      flash[:alert] = "URLの編集に失敗しました"
       render("urls/edit")
     end
   end
+
   def show
-  @url=Url.find_by(id: params[:id])
+    @url = Url.find_by(id: params[:id])
   end
+
   def create
-    @url=Url.new(url: params[:url], name: params[:name], user_id: @current_user.id)
+    @url = Url.new(url: params[:url], name: params[:name], user_id: @current_user.id, cnt: 0)
     if @url.save
-      flash[:notice]="URLを登録しました"
+      flash[:notice] = "URLを登録しました"
       redirect_to("/urls/index")
     else
-      flash[:alert]="URLの登録に失敗しました"
+      flash[:alert] = "URLの登録に失敗しました"
       render("urls/new")
     end
   end
 
-
   def destroy
-    @url=Url.find_by(id: params[:id])
+    @url = Url.find_by(id: params[:id])
     if @url.destroy
-      flash[:notice]="URLを削除しました"
-    redirect_to("/urls/index")
+      flash[:notice] = "URLを削除しました"
+      redirect_to("/urls/index")
     else
-    flash[:alert]="URLの削除に失敗しました"
-    render("urls/index")
+      flash[:alert] = "URLの削除に失敗しました"
+      render("urls/index")
     end
+  end
+
+  def cnt
+    @url = Url.find_by(id: params[:id])
+    @url.cnt = @url.cnt + 1
+    @url.save
+    redirect_to "https://example.com", allow_other_host: true
   end
 end

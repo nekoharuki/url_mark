@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :now_login_check, { only: [ :new, :create, :login_form, :login ] }
-  before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout ] }
+  # before_action :now_login_check, { only: [ :new, :create, :login_form, :login ] }
+  # before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout ] }
 
   def index
     @users = User.all

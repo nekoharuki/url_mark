@@ -3,4 +3,5 @@ class Url < ApplicationRecord
 
   validates :name, presence: true
   validates :url, presence: true
+  validates :cnt, presence: true
 end

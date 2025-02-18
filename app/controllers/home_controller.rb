@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :now_login_check
+  # before_action :now_login_check
 
   def top
   end

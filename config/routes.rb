@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "urls/index" => "urls#index"
   get "urls/new" => "urls#new"
   post "urls/create" => "urls#create"
+  post "urls/:id/cnt" => "urls#cnt"
   get "urls/:id/edit" => "urls#edit"
   post "urls/:id/update" => "urls#update"
   post "urls/:id/destroy" => "urls#destroy"
