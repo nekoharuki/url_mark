@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   post "urls/:id/destroy" => "urls#destroy"
   get "urls/:id" => "urls#show"
 
+  get "login" => "users#login_form"
+  post "login" => "users#login"
+
   get "/" => "home#top"
   get "/about" => "home#about"
 end

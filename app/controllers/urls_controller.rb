@@ -27,7 +27,7 @@ class UrlsController < ApplicationController
   @url=Url.find_by(id: params[:id])
   end
   def create
-    @url=Url.new(url: params[:url], name: params[:name], user_id: 6)
+    @url=Url.new(url: params[:url], name: params[:name], user_id: @current_user.id)
     if @url.save
       flash[:notice]="URLを登録しました"
       redirect_to("/urls/index")

@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(name: params[:name], email: params[:email], password: params[:password])
     if @user.save
+      session[:user_id]=@user.id
       flash[:notice] = "ユーザー登録できました"
       redirect_to("/users/index")
     else
@@ -43,11 +44,18 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find_by(id: params[:id])
     if @user.destroy
+      session[:user_id]=nil
       flash[:notice] = "ユーザー削除できました"
       redirect_to("/users/index")
     else
       flash[:alert] = "ユーザー削除できませんでした"
       redirect_to("/users/#{@user.id}")
     end
+  end
+  def login_form
+
+  end
+  def login
+
   end
 end
