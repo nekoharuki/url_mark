@@ -6,4 +6,15 @@ class ApplicationController < ActionController::Base
   def set_current_user
     @current_user=User.find_by(id: session[:user_id])
   end
+
+  def now_login_check
+    if session[:user_id]!=nil
+      flash[:alert]="そのページには行けません"
+    end
+  end
+  def now_logout_check
+    if session[:user_id]==nil
+      flash[:alert]="そのページには行けません"
+    end
+  end
 end

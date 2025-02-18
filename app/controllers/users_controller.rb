@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :now_login_check, { only: [ :new, :create, :login_form, :login ] }
+  before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout ] }
+
   def index
     @users = User.all
   end
@@ -53,9 +56,20 @@ class UsersController < ApplicationController
     end
   end
   def login_form
-
   end
   def login
-
+    @user = User.find_by(email: params[:email], password: params[:password])
+    if @user
+      flash[:notice]="ログインできました"
+      session[:user_id]=@user.id
+      redirect_to("/urls/index")
+    else
+      flash[:alert]="ログインできませんでした"
+      render("users/login_form")
+    end
+  end
+  def logout
+    session[:user_id]=nil
+    redirect_to("/login")
   end
 end

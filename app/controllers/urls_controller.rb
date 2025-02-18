@@ -1,4 +1,5 @@
 class UrlsController < ApplicationController
+  before_action :now_logout_check
   def index
     @urls=Url.all
   end
