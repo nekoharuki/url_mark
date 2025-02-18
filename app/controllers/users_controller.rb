@@ -59,6 +59,8 @@ class UsersController < ApplicationController
   end
   def login
     @user = User.find_by(email: params[:email], password: params[:password])
+    @email=params[:email]
+    @password=params[:password]
     if @user
       flash[:notice]="ログインできました"
       session[:user_id]=@user.id
@@ -70,6 +72,7 @@ class UsersController < ApplicationController
   end
   def logout
     session[:user_id]=nil
+    flash[:notice]="ログアウトできました"
     redirect_to("/login")
   end
 end
