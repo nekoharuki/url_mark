@@ -62,6 +62,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Set permissions for rubocop
+        run: chmod +x bin/rubocop
+
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
@@ -80,6 +83,9 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+
+      - name: Set permissions for rails
+        run: chmod +x bin/rails
 
       - name: Run tests
         env:
