@@ -19,6 +19,12 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Verify Ruby installation
+        run: which ruby
+
+      - name: Ensure correct Ruby interpreter
+        run: sed -i '1s/.*/#!\/usr\/bin\/env ruby/' bin/brakeman
+
       - name: Set permissions for brakeman
         run: chmod +x bin/brakeman
 
@@ -37,6 +43,9 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+
+      - name: Set permissions for importmap
+        run: chmod +x bin/importmap
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bin/importmap audit
