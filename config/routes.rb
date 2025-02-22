@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post "likes/:url_id/create" => "likes#create"
+  post "likes/:url_id/destroy" => "likes#destroy"
+
   get "users/index" => "users#index"
   get "users/new" => "users#new"
   post "users/create" => "users#create"
@@ -8,6 +11,7 @@ Rails.application.routes.draw do
   get "users/:id" => "users#show"
 
   get "urls/index" => "urls#index"
+  get "urls/like" => "urls#like"
   get "urls/new" => "urls#new"
   post "urls/create" => "urls#create"
   get "urls/:id/edit" => "urls#edit"

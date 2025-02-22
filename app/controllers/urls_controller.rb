@@ -1,7 +1,7 @@
 class UrlsController < ApplicationController
   before_action :now_logout_check
   def index
-    @urls=Url.all
+    @urls=Url.where(user_id: @current_user.id)
   end
 
   def new
@@ -48,5 +48,8 @@ class UrlsController < ApplicationController
     flash[:alert]="URLの削除に失敗しました"
     render("urls/index")
     end
+  end
+  def like
+      @likes=Like.where(user_id: @current_user.id)
   end
 end
