@@ -16,8 +16,11 @@ Rails.application.routes.draw do
   get "urls/new" => "urls#new"
   post "urls/create" => "urls#create"
   get "urls/genres/:genre" => "urls#genres"
-  post "urls/search" => "urls#search"
-  get "urls/search/:name" => "urls#search_name"
+
+  get "urls/search" => "urls#search"
+  post "urls/search_title" => "urls#search_title"
+  get "urls/search_result/:title" => "urls#search_result"
+
   get "urls/:id/edit" => "urls#edit"
   post "urls/:id/update" => "urls#update"
   post "urls/:id/destroy" => "urls#destroy"

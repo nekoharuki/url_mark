@@ -64,23 +64,23 @@ class UrlsController < ApplicationController
   def like
       @likes=Like.where(user_id: @current_user.id)
   end
-  def genre
+  def search
       @genres=Url.select(:genre).distinct
   end
   def genres
       @genre=params[:genre]
       @urls=Url.where(genre: params[:genre])
   end
-  def search
+  def search_title
     @urls=Url.where(title: params[:title])
     if @urls.empty?
       flash[:alert]="該当するURLがありません"
       redirect_to("/urls/genre")
     else
-      redirect_to("/urls/search/#{params[:title]}")
+      redirect_to("/urls/search_result/#{params[:title]}")
     end
   end
-  def search_title
+  def search_result
     @urls=Url.where(title: params[:title])
   end
 end
