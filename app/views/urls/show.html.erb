@@ -20,6 +20,13 @@
 </div>
 
 <br>
+<%if @url.memo!=""%>
+<div>
+  <label for="memo">メモ:</label>
+  <%= @url.memo %>
+</div>
 
+<br>
+<%end%>
 <%= link_to("編集", "/urls/#{@url.id}/edit") %>
 <%= link_to("削除", "/urls/#{@url.id}/destroy", data: { turbo_method: "post" }) %>

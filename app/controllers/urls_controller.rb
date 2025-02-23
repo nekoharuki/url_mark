@@ -16,6 +16,8 @@ class UrlsController < ApplicationController
     @url=Url.find_by(id: params[:id])
     @url.name=params[:name]
     @url.url=params[:url]
+    @url.genre=params[:genre]
+    @url.memo=params[:memo]
     if @url.save
       flash[:notice]="URLを編集しました"
     redirect_to("/urls/#{@url.id}")
@@ -28,7 +30,7 @@ class UrlsController < ApplicationController
   @url=Url.find_by(id: params[:id])
   end
   def create
-    @url=Url.new(url: params[:url], name: params[:name], user_id: @current_user.id, genre: params[:genre])
+    @url=Url.new(url: params[:url], name: params[:name], user_id: @current_user.id, genre: params[:genre], memo: params[:memo])
     if @url.save
       flash[:notice]="URLを登録しました"
       redirect_to("/urls/index")
