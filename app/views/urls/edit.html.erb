@@ -3,8 +3,8 @@
 <%= form_tag("/urls/#{@url.id}/update") do %>
 
   <div>
-    <label for="name">URLのタイトル:</label>
-    <input type="text" name="name" title="タイトルを入力してください" placeholder="タイトル" value="<%= @url.name %>" required>
+    <label for="title">URLのタイトル:</label>
+    <input type="text" name="title" title="タイトルを入力してください" placeholder="タイトル" value="<%= @url.title %>" required>
   </div>
 
   <br>

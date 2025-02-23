@@ -14,7 +14,7 @@ class UrlsController < ApplicationController
 
   def update
     @url=Url.find_by(id: params[:id])
-    @url.name=params[:name]
+    @url.title=params[:title]
     @url.url=params[:url]
     @url.genre=params[:genre]
     @url.memo=params[:memo]
@@ -30,7 +30,7 @@ class UrlsController < ApplicationController
   @url=Url.find_by(id: params[:id])
   end
   def create
-    @url=Url.new(url: params[:url], name: params[:name], user_id: @current_user.id, genre: params[:genre], memo: params[:memo])
+    @url=Url.new(url: params[:url], title: params[:title], user_id: @current_user.id, genre: params[:genre], memo: params[:memo])
     if @url.save
       flash[:notice]="URLを登録しました"
       redirect_to("/urls/index")
@@ -62,15 +62,15 @@ class UrlsController < ApplicationController
       @urls=Url.where(genre: params[:genre])
   end
   def search
-    @urls=Url.where(name: params[:name])
+    @urls=Url.where(title: params[:title])
     if @urls.empty?
       flash[:alert]="該当するURLがありません"
       redirect_to("/urls/genre")
     else
-      redirect_to("/urls/search/#{params[:name]}")
+      redirect_to("/urls/search/#{params[:title]}")
     end
   end
-  def search_name
-    @urls=Url.where(name: params[:name])
+  def search_title
+    @urls=Url.where(title: params[:title])
   end
 end

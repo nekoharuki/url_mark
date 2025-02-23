@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_23_065636) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_23_083057) do
   create_table "likes", force: :cascade do |t|
     t.integer "url_id"
     t.datetime "created_at", null: false
@@ -19,7 +19,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_23_065636) do
   end
 
   create_table "urls", force: :cascade do |t|
-    t.string "name"
     t.text "url"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -27,6 +26,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_23_065636) do
     t.integer "cnt"
     t.string "genre"
     t.text "memo"
+    t.string "title"
     t.index ["user_id"], name: "index_urls_on_user_id"
   end
 
