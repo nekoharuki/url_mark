@@ -1,5 +1,12 @@
 <h1>ジャンル一覧</h1>
 
+  <div>
+    <label for="search">タイトル検索:</label>
+    <input type="text" name="search" title="タイトルを入力してください" placeholder="タイトル"  required>
+  </div>
+
+<br>
+<br>
 <% @genres.each do |genre| %>
   <%= link_to(genre.genre,"/urls/genres/#{genre.genre}") %>
   <br>
