@@ -22,6 +22,7 @@
         <li><%= link_to("URLお気に入り一覧", "/urls/like") %></li>
         <li><%= link_to("URL新規登録", "/urls/new") %></li>
         <li><%= link_to("ユーザー一覧", "/users/index") %></li>
+        <li><%= link_to("ジャンル一覧", "/urls/genre") %></li>
         <li><%= link_to("ログアウト", "/logout",data: { turbo_method: "post" }) %></li>
       <%else%>
         <li><%= link_to("ホーム", "/") %></li>

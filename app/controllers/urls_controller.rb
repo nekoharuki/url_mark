@@ -54,4 +54,10 @@ class UrlsController < ApplicationController
   def like
       @likes=Like.where(user_id: @current_user.id)
   end
+  def genre
+      @genres=Url.select(:genre).distinct
+  end
+  def genres
+      @urls=Url.where(genre: params[:genre])
+  end
 end

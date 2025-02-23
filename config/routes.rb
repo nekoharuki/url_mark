@@ -11,9 +11,11 @@ Rails.application.routes.draw do
   get "users/:id" => "users#show"
 
   get "urls/index" => "urls#index"
+  get "urls/genre" => "urls#genre"
   get "urls/like" => "urls#like"
   get "urls/new" => "urls#new"
   post "urls/create" => "urls#create"
+  get "urls/genres/:genre" => "urls#genres"
   get "urls/:id/edit" => "urls#edit"
   post "urls/:id/update" => "urls#update"
   post "urls/:id/destroy" => "urls#destroy"
