@@ -4,14 +4,21 @@
 
   <div>
     <label for="name">URLのタイトル:</label>
-    <input type="text" name="name" id="name" title="タイトルを入力してください" placeholder="タイトル" value="<%= @url.name %>" required>
+    <input type="text" name="name" title="タイトルを入力してください" placeholder="タイトル" value="<%= @url.name %>" required>
   </div>
 
   <br>
 
   <div>
     <label for="url">URL:</label>
-    <textarea name="url" id="url" title="URLを入力してください" placeholder="URL" cols="150"><%= @url.url %></textarea>
+    <textarea name="url" title="URLを入力してください" placeholder="URL" cols="150"><%= @url.url %></textarea>
+  </div>
+
+  <br>
+
+  <div>
+    <label for="genre">ジャンル:</label>
+    <input name="genre" title="ジャンルを入力してください" placeholder="ジャンル" value="<%= @url.genre %>" required>
   </div>
 
   <br>

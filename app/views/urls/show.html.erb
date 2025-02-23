@@ -14,5 +14,12 @@
 
 <br>
 
+<div>
+  <label for="genre">ジャンル:</label>
+  <%= @url.genre %>
+</div>
+
+<br>
+
 <%= link_to("編集", "/urls/#{@url.id}/edit") %>
 <%= link_to("削除", "/urls/#{@url.id}/destroy", data: { turbo_method: "post" }) %>
