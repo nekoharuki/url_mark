@@ -1,5 +1,6 @@
-<h1>ジャンル一覧</h1>
+<h1>URL検索</h1>
 
+<h2>タイトル  検索</h2>
 <%= form_tag("/urls/search") do %>
   <div>
     <label for="title">タイトル検索:</label>
@@ -10,9 +11,10 @@
 
 <br>
 <br>
-
+<h2>ジャンル一覧</h2>
+<ul>
 <% @genres.each do |genre| %>
-  <%= link_to(genre.genre, "/urls/genres/#{genre.genre}") %>
-  <br>
+  <li><%= link_to(genre.genre, "/urls/genres/#{genre.genre}") %></li>
   <br>
 <% end %>
+</ul>

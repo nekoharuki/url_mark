@@ -14,20 +14,25 @@ class UrlsController < ApplicationController
 
   def update
     @url=Url.find_by(id: params[:id])
-    @url.title=params[:title]
-    @url.url=params[:url]
-    @url.genre=params[:genre]
-    @url.memo=params[:memo]
-    if @url.save
-      flash[:notice]="URLを編集しました"
-    redirect_to("/urls/#{@url.id}")
+    if @url
+      @url.title=params[:title]
+      @url.url=params[:url]
+      @url.genre=params[:genre]
+      @url.memo=params[:memo]
+      if @url.save
+        flash[:notice]="URLを編集しました"
+        redirect_to("/urls/#{@url.id}")
+      else
+        flash[:alert]="URLの編集に失敗しました"
+        render("urls/edit")
+      end
     else
-      flash[:alert]="URLの編集に失敗しました"
+      flash[:alert]="URLが見つかりませんでした"
       render("urls/edit")
     end
   end
   def show
-  @url=Url.find_by(id: params[:id])
+    @url=Url.find_by(id: params[:id])
   end
   def create
     @url=Url.new(url: params[:url], title: params[:title], user_id: @current_user.id, genre: params[:genre], memo: params[:memo])
@@ -43,12 +48,17 @@ class UrlsController < ApplicationController
 
   def destroy
     @url=Url.find_by(id: params[:id])
-    if @url.destroy
-      flash[:notice]="URLを削除しました"
-    redirect_to("/urls/index")
+    if @url
+      if @url.destroy
+        flash[:notice]="URLを削除しました"
+        redirect_to("/urls/index")
+      else
+        flash[:alert]="URLの削除に失敗しました"
+        render("urls/index")
+      end
     else
-    flash[:alert]="URLの削除に失敗しました"
-    render("urls/index")
+      flash[:alert]="URLが見つかりませんでした"
+      render("urls/index")
     end
   end
   def like

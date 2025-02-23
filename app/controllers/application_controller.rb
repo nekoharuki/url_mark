@@ -8,13 +8,13 @@ class ApplicationController < ActionController::Base
   end
 
   def now_login_check
-    if session[:user_id]!=nil
+    if @current_user!=nil
       flash[:alert]="そのページには行けません"
       redirect_to("/urls/index")
     end
   end
   def now_logout_check
-    if session[:user_id]==nil
+    if @current_user==nil
       flash[:alert]="そのページには行けません"
       redirect_to("/login")
     end
