@@ -58,6 +58,7 @@ class UrlsController < ApplicationController
       @genres=Url.select(:genre).distinct
   end
   def genres
+      @genre=params[:genre]
       @urls=Url.where(genre: params[:genre])
   end
   def search

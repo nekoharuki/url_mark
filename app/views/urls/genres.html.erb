@@ -1,4 +1,4 @@
-<h1>URLの一覧</h1>
+<h1><%=@genre%>の一覧</h1>
 
 <% @urls.each do |url| %>
   <%= link_to(url.name, url.url) %>
