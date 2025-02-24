@@ -77,10 +77,10 @@ class UrlsController < ApplicationController
       flash[:alert] = "該当するURLがありません"
       redirect_to("/urls/genre")
     else
-      redirect_to("/urls/search_result/#{params[:title]}")
+      redirect_to urls_search_result_path(title: params[:title])
     end
   end
   def search_result
-    @urls=Url.where(title: params[:title])
+    @urls = Url.where("title LIKE ?", "%#{params[:title]}%")
   end
 end

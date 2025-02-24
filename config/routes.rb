@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   get "urls/search" => "urls#search"
   post "urls/search_title" => "urls#search_title"
-  get "urls/search_result/:title" => "urls#search_result"
+  get "urls/search_result" => "urls#search_result"
 
   get "urls/:id/edit" => "urls#edit"
   post "urls/:id/update" => "urls#update"
