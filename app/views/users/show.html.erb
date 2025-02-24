@@ -11,6 +11,8 @@
 </div>
 <br>
 
-<%= link_to("編集", "/users/#{@user.id}/edit") %>
-<%= link_to("削除", "/users/#{@user.id}/destroy", data: { turbo_method: "post" }) %>
-<%= link_to("パスワード変更", "/users/#{@user.id}/password_change_form") %>
+<%if @current_user.id==@user.id%>
+  <%= link_to("編集", "/users/#{@user.id}/edit") %>
+  <%= link_to("削除", "/users/#{@user.id}/destroy", data: { turbo_method: "post" }) %>
+  <%= link_to("パスワード変更", "/users/#{@user.id}/password_change_form") %>
+<%end%>

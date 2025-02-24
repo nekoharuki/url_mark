@@ -28,5 +28,8 @@
 
 <br>
 <%end%>
+
+<%if @current_user.id==@url.user_id%>
 <%= link_to("編集", "/urls/#{@url.id}/edit") %>
 <%= link_to("削除", "/urls/#{@url.id}/destroy", data: { turbo_method: "post" }) %>
+<%end%>

@@ -1,9 +1,13 @@
 class UrlsController < ApplicationController
   before_action :now_logout_check
+  before_action :user_check, { only: [:edit, :update, :destroy ] }
+
   def index
+    @urls=Url.all
+  end
+  def myurl
     @urls=Url.where(user_id: @current_user.id)
   end
-
   def new
     @url=Url.new
   end
@@ -82,5 +86,12 @@ class UrlsController < ApplicationController
   end
   def search_result
     @urls = Url.where("title LIKE ?", "%#{params[:title]}%")
+  end
+  def user_check
+      @url=Url.find_by(id: params[:id])
+      if @current_user.id!=@url.user_id
+        flash[:notice]="そのページには行けません"
+        redirect_to("/urls/index")
+      end
   end
 end

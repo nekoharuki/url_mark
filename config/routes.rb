@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "users/:id" => "users#show"
 
   get "urls/index" => "urls#index"
+  get "urls/myurl" => "urls#myurl"
   get "urls/genre" => "urls#genre"
   get "urls/like" => "urls#like"
   get "urls/new" => "urls#new"

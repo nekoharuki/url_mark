@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :now_login_check, { only: [ :new, :create, :login_form, :login ] }
-  before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout, :current_check] }
-  before_action :current_check, { only: [ :show, :edit, :update, :destroy, :password_change, :password_change_form] }
+  before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout, :current_check ] }
+  before_action :current_check, { only: [ :show, :edit, :update, :destroy, :password_change, :password_change_form ] }
 
   def index
     @users = User.all
@@ -114,7 +114,7 @@ class UsersController < ApplicationController
 
   def current_check
     if @current_user.id!=params[:id].to_i
-      flash[:alert]="そのURLは適切ではありません"
+      flash[:alert]="そのページには行けません"
       redirect_to("/urls/index")
     end
   end
