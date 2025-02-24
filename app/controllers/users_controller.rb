@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :now_login_check, { only: [ :new, :create, :login_form, :login ] }
-  before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout ] }
+  before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout, :current_check] }
   before_action :current_check, { only: [ :show, :edit, :update, :destroy ] }
 
   def index
@@ -36,7 +36,6 @@ class UsersController < ApplicationController
     if @user
       @user.name = params[:name]
       @user.email = params[:email]
-      @user.password = params[:password]
       if @user.save
         flash[:notice] = "ユーザー編集に成功しました"
         redirect_to("/users/#{@user.id}")
@@ -90,6 +89,9 @@ class UsersController < ApplicationController
     flash[:notice]="ログアウトに成功しました"
     redirect_to("/login")
   end
+  def password_change
+  end
+
   def current_check
     if @current_user.id!=params[:id].to_i
       flash[:alert]="そのURLは適切ではありません"

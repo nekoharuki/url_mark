@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "users/index" => "users#index"
   get "users/new" => "users#new"
   post "users/create" => "users#create"
+  post "users/password_change" => "users#password_change"
   get "users/:id/edit" => "users#edit"
   post "users/:id/update" => "users#update"
   post "users/:id/destroy" => "users#destroy"
