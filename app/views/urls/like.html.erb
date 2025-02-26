@@ -1,10 +1,10 @@
-<h1>お気に入りURLの一覧</h1>
+<h1>いいねURLの一覧</h1>
 
 <% @likes.each do |like| %>
   <%url=Url.find_by(id: like.url_id)%>
   <%= link_to(url.title, url.url) %>
   <%= link_to("詳細へ", "/urls/#{url.id}") %>
-  <%= link_to("お気に入り削除 ", "/likes/#{url.id}/destroy",data: { turbo_method: "post" }) %>
+  <%= link_to("いいね削除 ", "/likes/#{url.id}/destroy",data: { turbo_method: "post" }) %>
 
   <br>
   <br>
