@@ -111,6 +111,10 @@ class UsersController < ApplicationController
   def password_change_form
     @user=User.find_by(id: params[:id])
   end
+  def myurl
+    @user=User.find_by(id: params[:id])
+    @urls=Url.where(user_id: @user.id)
+  end
 
   def current_check
     if @current_user.id!=params[:id].to_i

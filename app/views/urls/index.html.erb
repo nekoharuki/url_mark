@@ -3,11 +3,20 @@
 <% @urls.each do |url| %>
   <%= link_to(url.title, url.url) %>
   <%= link_to("詳細へ", "/urls/#{url.id}") %>
-<%if Like.find_by(url_id: url.id, user_id: @current_user.id)%>
-  <%= link_to("いいね削除", "/likes/#{url.id}/destroy",data: { turbo_method: "post" }) %>
+
+<%if url.user_id==@current_user.id%>
+  <%if Good.find_by(url_id: url.id, user_id: @current_user.id)%>
+    <%= link_to("お気に入り削除", "/goods/#{url.id}/destroy",data: { turbo_method: "post" }) %>
+  <%else%>
+    <%= link_to("お気に入り登録", "/goods/#{url.id}/create",data: { turbo_method: "post" }) %>
+  <%end%>
 <%else%>
-  <%= link_to("いいね登録", "/likes/#{url.id}/create",data: { turbo_method: "post" }) %>
+  <%if Like.find_by(url_id: url.id, user_id: @current_user.id)%>
+    <%= link_to("いいね削除", "/likes/#{url.id}/destroy",data: { turbo_method: "post" }) %>
+  <%else%>
+    <%= link_to("いいね登録", "/likes/#{url.id}/create",data: { turbo_method: "post" }) %>
+  <%end%>
 <%end%>
-  <br>
-  <br>
+<br>
+<br>
 <% end %>

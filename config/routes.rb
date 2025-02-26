@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post "users/create" => "users#create"
 
   get "users/:id/edit" => "users#edit"
+  get "users/:id/myurl" => "users#myurl"
   get "users/:id/password_change_form" => "users#password_change_form"
   post "users/:id/update" => "users#update"
   post "users/:id/destroy" => "users#destroy"
@@ -18,9 +19,9 @@ Rails.application.routes.draw do
   get "users/:id" => "users#show"
 
   get "urls/index" => "urls#index"
-  get "urls/myurl" => "urls#myurl"
   get "urls/genre" => "urls#genre"
   get "urls/like" => "urls#like"
+  get "urls/good" => "urls#good"
   get "urls/new" => "urls#new"
   post "urls/create" => "urls#create"
   get "urls/genres/:genre" => "urls#genres"

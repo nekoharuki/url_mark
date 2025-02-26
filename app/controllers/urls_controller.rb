@@ -5,9 +5,6 @@ class UrlsController < ApplicationController
   def index
     @urls=Url.all
   end
-  def myurl
-    @urls=Url.where(user_id: @current_user.id)
-  end
   def new
     @url=Url.new
   end
@@ -69,7 +66,7 @@ class UrlsController < ApplicationController
       @likes=Like.where(user_id: @current_user.id)
   end
   def good
-      @good=Good.where(user_id: @current_user.id)
+      @goods=Good.where(user_id: @current_user.id)
   end
   def search
       @genres=Url.select(:genre).distinct

@@ -19,8 +19,9 @@
       <%if @current_user %>
         <li><%= link_to("URL新規登録", "/urls/new") %></li>
         <li><%= link_to("URL一覧", "/urls/index") %></li>
-        <li><%= link_to("自分のURL一覧", "/urls/myurl") %></li>
+        <li><%= link_to("自分のURL一覧", "/users/#{@current_user.id}/myurl") %></li>
         <li><%= link_to("URLいいね一覧", "/urls/like") %></li>
+        <li><%= link_to("URLお気に入り一覧", "/urls/good") %></li>
         <li><%= link_to("URL新規登録", "/urls/new") %></li>
         <li><%= link_to("ユーザー一覧", "/users/index") %></li>
         <li><%= link_to("ユーザー詳細", "/users/#{@current_user.id}") %></li>
