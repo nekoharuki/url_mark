@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  get "goods/index"
   post "likes/:url_id/create" => "likes#create"
   post "likes/:url_id/destroy" => "likes#destroy"
+
+  post "goods/:url_id/create" => "goods#create"
+  post "goods/:url_id/destroy" => "goods#destroy"
 
   get "users/index" => "users#index"
   get "users/new" => "users#new"
