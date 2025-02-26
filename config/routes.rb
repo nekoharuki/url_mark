@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+
   post "likes/:url_id/create" => "likes#create"
   post "likes/:url_id/destroy" => "likes#destroy"
 
