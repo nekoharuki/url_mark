@@ -1,6 +1,6 @@
 class UrlsController < ApplicationController
   before_action :now_logout_check
-  before_action :user_check, { only: [:edit, :update, :destroy ] }
+  before_action :user_check, { only: [ :edit, :update, :destroy ] }
 
   def index
     @urls=Url.all
@@ -67,6 +67,9 @@ class UrlsController < ApplicationController
   end
   def like
       @likes=Like.where(user_id: @current_user.id)
+  end
+  def good
+      @good=Good.where(user_id: @current_user.id)
   end
   def search
       @genres=Url.select(:genre).distinct
