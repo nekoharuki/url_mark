@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     user = User.from_omniauth(auth)
+
     if user.persisted?
       session[:user_id] = user.id
       flash[:notice] = "ログインしました"
@@ -10,5 +11,11 @@ class SessionsController < ApplicationController
       flash[:alert] = "ログインに失敗しました: #{user.errors.full_messages.join(", ")}"
       redirect_to("/login")
     end
+  end
+
+  def destroy
+    session[:user_id] = nil
+    flash[:notice] = "ログアウトしました"
+    redirect_to("/login")
   end
 end

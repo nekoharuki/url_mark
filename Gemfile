@@ -31,11 +31,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 gem "omniauth"
-
 gem "omniauth-google-oauth2"
-
 gem "omniauth-github"
-
 gem "omniauth-rails_csrf_protection"
 
 

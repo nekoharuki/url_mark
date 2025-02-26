@@ -1,5 +1,5 @@
-OmniAuth.config.allowed_request_methods = [ :post, :get ]
-OmniAuth.config.silence_get_warning = true
+OmniAuth.config.allowed_request_methods = [ :post, :get ] # GETリクエストも許可
+OmniAuth.config.silence_get_warning = true # GETリクエストの警告を無視
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {
@@ -9,6 +9,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     image_size: 50,
     access_type: "offline"
   }
+
   provider :github, ENV["GITHUB_CLIENT_ID"], ENV["GITHUB_CLIENT_SECRET"], {
     scope: "user:email"
   }
