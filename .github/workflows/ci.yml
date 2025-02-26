@@ -23,7 +23,9 @@ jobs:
         run: which ruby
 
       - name: Ensure correct Ruby interpreter
-        run: sed -i '1s/.*/#!\/usr\/bin\/env ruby/' bin/brakeman
+        run: |
+          echo 'export PATH="$HOME/.rubies/ruby-$(cat .ruby-version)/bin:$PATH"' >> $GITHUB_ENV
+          sed -i '1s/.*/#!\/usr\/bin\/env ruby/' bin/brakeman
 
       - name: Set permissions for brakeman
         run: chmod +x bin/brakeman
@@ -90,7 +92,11 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-        run: bin/rails db:test:prepare test test:system
+        run: |
+          echo 'export PATH="$HOME/.rubies/ruby-$(cat .ruby-version)/bin:$PATH"' >> $GITHUB_ENV
+          bin/rails db:test:prepare
+          bin/rails test
+          bin/rails test:system
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
