@@ -16,14 +16,29 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(name: params[:name], email: params[:email], password: params[:password])
-    if @user.save
-      session[:user_id]=@user.id
-      flash[:notice] = "ユーザー登録に成功しました"
-      redirect_to("/users/index")
+    exist_user=User.find_by(email: params[:email])
+    @name=params[:name]
+    @email=params[:email]
+    @password=params[:password]
+    if exist_user
+      if exist_user && exist_user.authenticate(params[:password])
+        flash[:notice]="ログインに成功しました"
+        session[:user_id]=exist_user.id
+        redirect_to("/urls/index")
+      else
+        flash[:alert]="そのメールアドレスはすでに登録されています"
+        render("users/new")
+      end
     else
-      flash[:alert] = "ユーザー登録に失敗しました"
-      render("users/new")
+      @user = User.new(name: params[:name], email: params[:email], password: params[:password])
+      if @user.save
+        session[:user_id]=@user.id
+        flash[:notice] = "ユーザー登録に成功しました"
+        redirect_to("/urls/index")
+      else
+        flash[:alert] = "ユーザー登録に失敗しました"
+        render("users/new")
+      end
     end
   end
 
@@ -33,6 +48,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
+    @name=params[:name]
+    @email=params[:email]
     if @user
       @user.name = params[:name]
       @user.email = params[:email]
@@ -55,11 +72,12 @@ class UsersController < ApplicationController
       if @user.destroy
         session[:user_id]=nil
         flash[:notice] = "ユーザー削除できました"
-        redirect_to("/users/index")
+        redirect_to("/login")
       else
         flash[:alert] = "ユーザー削除できませんでした"
         redirect_to("/users/#{@user.id}")
       end
+    else
       flash[:alert] = "ユーザーが見つかりませんでした"
       redirect_to("/users/#{@user.id}")
     end
@@ -68,19 +86,19 @@ class UsersController < ApplicationController
   end
   def login
     @user = User.find_by(email: params[:email])
+    @email=params[:email]
+    @password=params[:password]
     if @user
       if @user && @user.authenticate(params[:password])
         flash[:notice]="ログインに成功しました"
         session[:user_id]=@user.id
-        @email=params[:email]
-        @password=params[:password]
         redirect_to("/urls/index")
       else
         flash[:alert]="メールアドレスまたはパスワードが間違っています"
         render("users/login_form")
       end
     else
-      flash[:alert]="ログインに失敗しました"
+      flash[:alert]="メールアドレスまたはパスワードが間違っています"
       render("users/login_form")
     end
   end
