@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_26_045141) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_27_060234) do
   create_table "goods", force: :cascade do |t|
     t.integer "url_id"
     t.integer "user_id"
@@ -26,14 +26,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_26_045141) do
   end
 
   create_table "urls", force: :cascade do |t|
-    t.text "url"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cnt"
     t.string "genre"
-    t.text "memo"
     t.string "title"
+    t.string "link"
+    t.text "explanation"
     t.index ["user_id"], name: "index_urls_on_user_id"
   end
 
@@ -43,6 +43,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_26_045141) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "provider"
+    t.string "uid"
   end
 
   add_foreign_key "urls", "users"

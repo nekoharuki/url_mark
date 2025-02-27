@@ -44,6 +44,8 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find_by(id: params[:id])
+    @name=@user.name
+    @email=@user.email
   end
 
   def update
@@ -140,7 +142,7 @@ class UsersController < ApplicationController
   end
 
   def current_check
-    if @current_user.id!=params[:id].to_i
+    if @current_user.id!=params[:id].to_i || @current_user==nil || params[:id]==nil
       flash[:alert]="そのページには行けません"
       redirect_to("/urls/index")
     end

@@ -2,7 +2,7 @@
 
 <% @goods.each do |good| %>
   <%url=Url.find_by(id: good.url_id)%>
-  <%= link_to(url.title, url.url) %>
+  <%= link_to(url.title, url.link) %>
   <%= link_to("詳細へ", "/urls/#{url.id}") %>
   <%= link_to("お気に入り削除 ", "/goods/#{url.id}/destroy",data: { turbo_method: "post" }) %>
 

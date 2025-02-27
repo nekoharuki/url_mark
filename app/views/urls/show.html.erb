@@ -8,8 +8,8 @@
 <br>
 
 <div>
-  <label for="url">URL:</label>
-  <%= @url.url %>
+  <label for="link">URL:</label>
+  <%= @url.link %>
 </div>
 
 <br>
@@ -26,10 +26,10 @@
 </div>
 
 <br>
-<%if @url.memo!=""%>
+<%if @url.explanation!=""%>
 <div>
-  <label for="memo">メモ:</label>
-  <%= @url.memo %>
+  <label for="explanation">メモ:</label>
+  <%= @url.explanation %>
 </div>
 <br>
 <%end%>

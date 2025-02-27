@@ -1,7 +1,7 @@
 <h1>検索結果</h1>
 
 <% @urls.each do |url| %>
-  <%= link_to(url.title, url.url) %>
+  <%= link_to(url.title, url.link) %>
   <%= link_to("詳細へ", "/urls/#{url.id}") %>
 <%if Like.find_by(url_id: url.id, user_id: @current_user.id)%>
   <%= link_to("お気に入り削除", "/likes/#{url.id}/destroy",data: { turbo_method: "post" }) %>

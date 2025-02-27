@@ -1,7 +1,7 @@
 <h1>URLの一覧</h1>
 
 <% @urls.each do |url| %>
-  <%= link_to(url.title, url.url) %>
+  <%= link_to(url.title, url.link) %>
   <%= link_to("詳細へ", "/urls/#{url.id}") %>
   <br>
   <br>

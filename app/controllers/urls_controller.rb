@@ -11,19 +11,23 @@ class UrlsController < ApplicationController
 
   def edit
     @url=Url.find_by(id: params[:id])
+    @title=@url.title
+    @link=@url.link
+    @genre=@url.genre
+    @explanation=@url.explanation
   end
 
   def update
     @url=Url.find_by(id: params[:id])
     @title=params[:title]
-    @url=params[:url]
+    @link=params[:link]
     @genre=params[:genre]
-    @memo=params[:memo]
+    @explanation=params[:explanation]
     if @url
       @url.title=params[:title]
-      @url.url=params[:url]
+      @url.link=params[:link]
       @url.genre=params[:genre]
-      @url.memo=params[:memo]
+      @url.explanation=params[:explanation]
       if @url.save
         flash[:notice]="URLを編集しました"
         redirect_to("/urls/#{@url.id}")
@@ -41,12 +45,12 @@ class UrlsController < ApplicationController
   end
 
     def create
-      @url = Url.new(url: params[:url], title: params[:title], user_id: @current_user.id, genre: params[:genre], memo: params[:memo])
-      @title=params[:title]
-      @url=params[:url]
-      @genre=params[:genre]
-      @memo=params[:memo]
-      if params[:url].blank? || params[:title].blank? || params[:genre].blank?
+      @url = Url.new(link: params[:link], title: params[:title], user_id: @current_user.id, genre: params[:genre], explanation: params[:explanation])
+      if params[:link].blank? || params[:title].blank? || params[:genre].blank?
+        @title=params[:title]
+        @link=params[:link]
+        @genre=params[:genre]
+        @explanation=params[:explanation]
         flash[:alert] = "入力してください"
         render("urls/new")
       else
@@ -54,6 +58,10 @@ class UrlsController < ApplicationController
           flash[:notice] = "URLを登録に成功しました"
           redirect_to("/urls/index")
         else
+          @title=params[:title]
+          @link=params[:link]
+          @genre=params[:genre]
+          @explanation=params[:explanation]
           flash[:alert] = "URLの登録に失敗しました"
           render("urls/new")
         end
@@ -101,8 +109,8 @@ class UrlsController < ApplicationController
   end
   def user_check
       @url=Url.find_by(id: params[:id])
-      if @current_user.id!=@url.user_id
-        flash[:notice]="そのページには行けません"
+      if @current_user.id!=@url.user_id || @current_user.id==nil || @url==nil
+        flash[:alert]="そのページには行けません"
         redirect_to("/urls/index")
       end
   end
