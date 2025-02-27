@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :now_login_check, { only: [ :new, :create, :login_form, :login ] }
-  before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout, :current_check ] }
+  before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout, :current_check, :myurl, :password_change, :password_change_form, :logout ] }
   before_action :current_check, { only: [ :show, :edit, :update, :destroy, :password_change, :password_change_form ] }
 
   def index
@@ -109,6 +109,8 @@ class UsersController < ApplicationController
   end
   def password_change
     @user=User.find_by(id: params[:id])
+    @current_password=params[:current_password]
+    @new_password=params[:new_password]
     if @user
       if @user && @user.authenticate(params[:current_password])
         @user.password=params[:new_password]
@@ -117,8 +119,6 @@ class UsersController < ApplicationController
         redirect_to("/users/#{@user.id}")
       else
         flash[:alert]="パスワードが間違っています"
-        @current_password=params[:current_password]
-        @new_password=params[:new_password]
         render("users/password_change_form")
       end
     else
@@ -131,7 +131,12 @@ class UsersController < ApplicationController
   end
   def myurl
     @user=User.find_by(id: params[:id])
-    @urls=Url.where(user_id: @user.id)
+    if @user
+      @urls=Url.where(user_id: @user.id)
+    else
+      flash[:alert]="そのユーザーは存在いません"
+      redirect_to("/urls/index")
+    end
   end
 
   def current_check
