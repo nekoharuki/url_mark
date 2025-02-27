@@ -15,6 +15,10 @@ class UrlsController < ApplicationController
 
   def update
     @url=Url.find_by(id: params[:id])
+    @title=params[:title]
+    @url=params[:url]
+    @genre=params[:genre]
+    @memo=params[:memo]
     if @url
       @url.title=params[:title]
       @url.url=params[:url]
@@ -35,31 +39,39 @@ class UrlsController < ApplicationController
   def show
     @url=Url.find_by(id: params[:id])
   end
-  def create
-    @url=Url.new(url: params[:url], title: params[:title], user_id: @current_user.id, genre: params[:genre], memo: params[:memo])
-    if @url.save
-      flash[:notice]="URLを登録しました"
-      redirect_to("/urls/index")
-    else
-      flash[:alert]="URLの登録に失敗しました"
-      render("urls/new")
+
+    def create
+      @url = Url.new(url: params[:url], title: params[:title], user_id: @current_user.id, genre: params[:genre], memo: params[:memo])
+      @title=params[:title]
+      @url=params[:url]
+      @genre=params[:genre]
+      @memo=params[:memo]
+      if params[:url].blank? || params[:title].blank? || params[:genre].blank?
+        flash[:alert] = "入力してください"
+        render("urls/new")
+      else
+        if @url.save
+          flash[:notice] = "URLを登録に成功しました"
+          redirect_to("/urls/index")
+        else
+          flash[:alert] = "URLの登録に失敗しました"
+          render("urls/new")
+        end
+      end
     end
-  end
-
-
   def destroy
     @url=Url.find_by(id: params[:id])
     if @url
       if @url.destroy
-        flash[:notice]="URLを削除しました"
+        flash[:notice]="URLを削除に成功しました"
         redirect_to("/urls/index")
       else
         flash[:alert]="URLの削除に失敗しました"
-        render("urls/index")
+        redirect_to("/urls/index")
       end
     else
       flash[:alert]="URLが見つかりませんでした"
-      render("urls/index")
+      redirect_to("/urls/index")
     end
   end
   def like
