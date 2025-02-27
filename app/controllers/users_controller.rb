@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :now_login_check, { only: [ :new, :create, :login_form, :login ] }
-  before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout, :current_check ] }
+  before_action :now_logout_check, { only: [ :index, :show, :edit, :update, :destroy, :logout, :current_check, :myurl, :password_change, :password_change_form, :logout ] }
   before_action :current_check, { only: [ :show, :edit, :update, :destroy, :password_change, :password_change_form ] }
 
   def index
@@ -16,23 +16,42 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(name: params[:name], email: params[:email], password: params[:password])
-    if @user.save
-      session[:user_id]=@user.id
-      flash[:notice] = "ユーザー登録に成功しました"
-      redirect_to("/users/index")
+    exist_user=User.find_by(email: params[:email])
+    @name=params[:name]
+    @email=params[:email]
+    @password=params[:password]
+    if exist_user
+      if exist_user && exist_user.authenticate(params[:password])
+        flash[:notice]="ログインに成功しました"
+        session[:user_id]=exist_user.id
+        redirect_to("/urls/index")
+      else
+        flash[:alert]="そのメールアドレスはすでに登録されています"
+        render("users/new")
+      end
     else
-      flash[:alert] = "ユーザー登録に失敗しました"
-      render("users/new")
+      @user = User.new(name: params[:name], email: params[:email], password: params[:password])
+      if @user.save
+        session[:user_id]=@user.id
+        flash[:notice] = "ユーザー登録に成功しました"
+        redirect_to("/urls/index")
+      else
+        flash[:alert] = "ユーザー登録に失敗しました"
+        render("users/new")
+      end
     end
   end
 
   def edit
     @user = User.find_by(id: params[:id])
+    @name=@user.name
+    @email=@user.email
   end
 
   def update
     @user = User.find_by(id: params[:id])
+    @name=params[:name]
+    @email=params[:email]
     if @user
       @user.name = params[:name]
       @user.email = params[:email]
@@ -55,11 +74,12 @@ class UsersController < ApplicationController
       if @user.destroy
         session[:user_id]=nil
         flash[:notice] = "ユーザー削除できました"
-        redirect_to("/users/index")
+        redirect_to("/login")
       else
         flash[:alert] = "ユーザー削除できませんでした"
         redirect_to("/users/#{@user.id}")
       end
+    else
       flash[:alert] = "ユーザーが見つかりませんでした"
       redirect_to("/users/#{@user.id}")
     end
@@ -68,19 +88,19 @@ class UsersController < ApplicationController
   end
   def login
     @user = User.find_by(email: params[:email])
+    @email=params[:email]
+    @password=params[:password]
     if @user
       if @user && @user.authenticate(params[:password])
         flash[:notice]="ログインに成功しました"
         session[:user_id]=@user.id
-        @email=params[:email]
-        @password=params[:password]
         redirect_to("/urls/index")
       else
         flash[:alert]="メールアドレスまたはパスワードが間違っています"
         render("users/login_form")
       end
     else
-      flash[:alert]="ログインに失敗しました"
+      flash[:alert]="メールアドレスまたはパスワードが間違っています"
       render("users/login_form")
     end
   end
@@ -91,6 +111,8 @@ class UsersController < ApplicationController
   end
   def password_change
     @user=User.find_by(id: params[:id])
+    @current_password=params[:current_password]
+    @new_password=params[:new_password]
     if @user
       if @user && @user.authenticate(params[:current_password])
         @user.password=params[:new_password]
@@ -99,8 +121,6 @@ class UsersController < ApplicationController
         redirect_to("/users/#{@user.id}")
       else
         flash[:alert]="パスワードが間違っています"
-        @current_password=params[:current_password]
-        @new_password=params[:new_password]
         render("users/password_change_form")
       end
     else
@@ -113,11 +133,16 @@ class UsersController < ApplicationController
   end
   def myurl
     @user=User.find_by(id: params[:id])
-    @urls=Url.where(user_id: @user.id)
+    if @user
+      @urls=Url.where(user_id: @user.id)
+    else
+      flash[:alert]="そのユーザーは存在いません"
+      redirect_to("/urls/index")
+    end
   end
 
   def current_check
-    if @current_user.id!=params[:id].to_i
+    if @current_user.id!=params[:id].to_i || @current_user==nil || params[:id]==nil
       flash[:alert]="そのページには行けません"
       redirect_to("/urls/index")
     end
