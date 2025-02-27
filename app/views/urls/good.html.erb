@@ -1,5 +1,4 @@
 <h1>お気に入りURLの一覧</h1>
-
 <% @goods.each do |good| %>
   <%url=Url.find_by(id: good.url_id)%>
   <%= link_to(url.title, url.link) %>
