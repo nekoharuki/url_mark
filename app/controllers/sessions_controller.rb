@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
     if user.persisted?
       session[:user_id] = user.id
       flash[:notice] = "ログインしました"
-      redirect_to items_path
+      redirect_to("/urls/index")
     else
       flash[:alert] = "ログインに失敗しました: #{user.errors.full_messages.join(", ")}"
-      redirect_to login_path
+      redirect_to("/login")
     end
   end
 end

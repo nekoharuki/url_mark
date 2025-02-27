@@ -39,8 +39,8 @@ Rails.application.routes.draw do
   post "login" => "users#login"
   post "logout" => "users#logout"
 
-  get 'auth/:provider/callback', to: 'sessions#create'
-  get 'auth/failure', to: redirect('/')
+  get "auth/:provider/callback", to: "sessions#create"
+  get "auth/failure", to: redirect("/")
 
   get "/" => "home#top"
   get "/about" => "home#about"
