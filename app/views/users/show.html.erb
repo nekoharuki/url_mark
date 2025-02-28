@@ -2,7 +2,6 @@
 
 <div class="card">
   <div class="card-body">
-  
     <div class="mb-3">
       <span class="fw-semibold font-weight-bold">名前:</span>
       <p class="form-control-plaintext"><%= @user.name %></p>
@@ -12,13 +11,13 @@
       <span class="fw-semibold font-weight-bold">メールアドレス:</span>
       <p class="form-control-plaintext"><%= @user.email %></p>
     </div>
+    
     <div class="mb-3">
-
-    <% if @current_user.id == @user.id %>
+      <% if @current_user.id == @user.id %>
         <%= link_to("編集", "/users/#{@user.id}/edit", class: "btn btn-success") %>
         <%= link_to("削除", "/users/#{@user.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
         <%= link_to("パスワード変更", "/users/#{@user.id}/password_change_form", class: "btn btn-success") %>
-    <% end %>
-          </div>
+      <% end %>
+    </div>
   </div>
 </div>
