@@ -1,4 +1,8 @@
-<%@follows.each do |follow|%>
-<%user=User.find_by(id: follow.followed_user)%>
-<%=link_to(user.name,"/users/#{user.id}/myurl")%>
-<%end%>
+<h1 class="mb-4">フォローした人の一覧</h1>
+
+<div class="list-group">
+  <% @follows.each do |follow| %>
+    <% user = User.find_by(id: follow.followed_user) %>
+    <%= link_to(user.name, "/users/#{user.id}/myurl", class: "list-group-item list-group-item-action") %>
+  <% end %>
+</div>

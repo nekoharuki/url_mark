@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_28_114238) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_28_131128) do
   create_table "follows", force: :cascade do |t|
-    t.integer "follower_user"
-    t.integer "followed_user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "follower_user_id"
+    t.integer "followed_user_id"
   end
 
   create_table "goods", force: :cascade do |t|

@@ -1,12 +1,14 @@
-<h1 class="mb-4"><%=@user.name%>のURLの一覧</h1>
+<h1 class="mb-4"><%= @user.name %>のURLの一覧</h1>
 
-<%if @user.id!=@current_user.id%>
-<%if Follow.find_by(follower_user: @current_user.id, followed_user: @user.id)%>
-<%=link_to("フォローを解除する","/follows/#{@user.id}/destroy",data: { turbo_method: "post" })%>
-<%else%>
-<%=link_to("フォローする","/follows/#{@user.id}/create",data: { turbo_method: "post" })%>
-<%end%>
-<%end%>
+<% if @user.id != @current_user.id %>
+  <div class="mb-4">
+    <% if Follow.find_by(follower_user_id: @current_user.id, followed_user_id: @user.id) %>
+      <%= link_to("フォローを解除する", "/follows/#{@user.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
+    <% else %>
+      <%= link_to("フォローする", "/follows/#{@user.id}/create", data: { turbo_method: "post" }, class: "btn btn-primary") %>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="row">
   <% @urls.each do |url| %>

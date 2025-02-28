@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   post "goods/:url_id/create" => "goods#create"
   post "goods/:url_id/destroy" => "goods#destroy"
 
-  post "follows/:followed_user/create" => "follows#create"
-  post "follows/:followed_user/destroy" => "follows#destroy"
+  post "follows/:followed_user_id/create" => "follows#create"
+  post "follows/:followed_user_id/destroy" => "follows#destroy"
 
   get "users/index" => "users#index"
   get "users/new" => "users#new"
