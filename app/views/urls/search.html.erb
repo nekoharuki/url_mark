@@ -17,7 +17,7 @@
 <ul class="list-group">
   <% @genres.each do |genre| %>
     <li class="list-group-item">
-      <%= link_to(genre.genre, "/urls/genres/#{genre.genre}", class: "text-decoration-none") %>
+      <%= link_to("●"+genre.genre, "/urls/genres/#{genre.genre}", class: "text-decoration-none") %>
     </li>
   <% end %>
 </ul>
