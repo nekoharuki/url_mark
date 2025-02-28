@@ -1,1 +1,4 @@
-@follows.each do |follow|
+<%@follows.each do |follow|%>
+user=User.find_by(id: follow.followed_user)
+<%link_to(user.name,"/users/#{user.id}/myurl")%>
+<%end%>
