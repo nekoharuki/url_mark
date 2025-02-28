@@ -1,54 +1,55 @@
-<h1>URLの詳細</h1>
+<h1 class="mb-4">URLの詳細</h1>
 
-<div>
-  <label for="title">URLのタイトル:</label>
-  <%= @url.title %>
+<div class="card">
+  <div class="card-body">
+    <div class="mb-3">
+      <label for="title" class="form-label">URLのタイトル:</label>
+      <p class="form-control-plaintext"><%= @url.title %></p>
+    </div>
+
+    <div class="mb-3">
+      <label for="link" class="form-label">URL:</label>
+      <p class="form-control-plaintext"><%= @url.link %></p>
+    </div>
+
+    <div class="mb-3">
+      <label for="genre" class="form-label">ジャンル:</label>
+      <p class="form-control-plaintext"><%= @url.genre %></p>
+    </div>
+
+    <div class="mb-3">
+      <label for="user" class="form-label">作成者:</label>
+      <p class="form-control-plaintext"><%= link_to(@url.user.name, "/users/#{@url.user_id}/myurl", class: "text-decoration-none") %></p>
+    </div>
+
+    <% if @url.explanation.present? %>
+      <div class="mb-3">
+        <label for="explanation" class="form-label">メモ:</label>
+        <p class="form-control-plaintext"><%= @url.explanation %></p>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <% if @url.user_id == @current_user.id %>
+        <% if Good.find_by(url_id: @url.id, user_id: @current_user.id) %>
+          <%= link_to("お気に入り削除", "/goods/#{@url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
+        <% else %>
+          <%= link_to("お気に入り登録", "/goods/#{@url.id}/create", data: { turbo_method: "post" }, class: "btn btn-success") %>
+        <% end %>
+      <% else %>
+        <% if Like.find_by(url_id: @url.id, user_id: @current_user.id) %>
+          <%= link_to("いいね削除", "/likes/#{@url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
+        <% else %>
+          <%= link_to("いいね登録", "/likes/#{@url.id}/create", data: { turbo_method: "post" }, class: "btn btn-success") %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <% if @current_user.id == @url.user_id %>
+      <div class="mb-3">
+        <%= link_to("編集", "/urls/#{@url.id}/edit", class: "btn btn-warning") %>
+        <%= link_to("削除", "/urls/#{@url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<br>
-
-<div>
-  <label for="link">URL:</label>
-  <%= @url.link %>
-</div>
-
-<br>
-
-<div>
-  <label for="genre">ジャンル:</label>
-  <%= @url.genre %>
-</div>
-
-<br>
-<div>
-  <label for="user">作成者:</label>
-  <%= link_to(@url.user.name,"/users/#{@url.user_id}/myurl") %>
-</div>
-
-<br>
-<%if @url.explanation!=""%>
-<div>
-  <label for="explanation">メモ:</label>
-  <%= @url.explanation %>
-</div>
-<br>
-<%end%>
-
-<%if @url.user_id==@current_user.id%>
-  <%if Good.find_by(url_id: @url.id, user_id: @current_user.id)%>
-    <%= link_to("お気に入り削除", "/goods/#{@url.id}/destroy",data: { turbo_method: "post" }) %>
-  <%else%>
-    <%= link_to("お気に入り登録", "/goods/#{@url.id}/create",data: { turbo_method: "post" }) %>
-  <%end%>
-<%else%>
-  <%if Like.find_by(url_id: @url.id, user_id: @current_user.id)%>
-    <%= link_to("いいね削除", "/likes/#{@url.id}/destroy",data: { turbo_method: "post" }) %>
-  <%else%>
-    <%= link_to("いいね登録", "/likes/#{@url.id}/create",data: { turbo_method: "post" }) %>
-  <%end%>
-<%end%>
-
-<%if @current_user.id==@url.user_id%>
-<%= link_to("編集", "/urls/#{@url.id}/edit") %>
-<%= link_to("削除", "/urls/#{@url.id}/destroy", data: { turbo_method: "post" }) %>
-<%end%>

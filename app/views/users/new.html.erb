@@ -1,23 +1,34 @@
-<h1>ユーザー新規登録</h1>
-<%= link_to "New with Google", "/auth/google_oauth2", method: :post %>
-<%= link_to "New with GitHub", "/auth/github", method: :post %>
+<h1 class="mb-4">ユーザー新規登録</h1>
 
-<%= form_tag("/users/create") do %>
+<div class="mb-3">
+  <%= link_to "New with Google", "/auth/google_oauth2", method: :post, class: "btn btn-outline-primary btn-block mb-2" %>
+  <%= link_to "New with GitHub", "/auth/github", method: :post, class: "btn btn-outline-dark btn-block mb-4" %>
+</div>
 
-  <div>
-    <label for="name">名前:</label>
-    <input type="text" name="name"  title="名前を入力してください" placeholder="名前" value="<%=@name%>" required>
+<%= form_tag("/users/create", class: "needs-validation", novalidate: true) do %>
+  <div class="mb-3">
+    <label for="name" class="form-label">名前:</label>
+    <input type="text" name="name" id="name" class="form-control" title="名前を入力してください" placeholder="名前" value="<%= @name %>" required>
+    <div class="invalid-feedback">
+      名前を入力してください。
+    </div>
   </div>
-  <br>
-  <div>
-    <label for="email">メールアドレス:</label>
-    <input type="email" name="email"  title="メールアドレスを入力してください" placeholder="メールアドレス" value="<%=@email%>" required>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">メールアドレス:</label>
+    <input type="email" name="email" id="email" class="form-control" title="メールアドレスを入力してください" placeholder="メールアドレス" value="<%= @email %>" required>
+    <div class="invalid-feedback">
+      メールアドレスを入力してください。
+    </div>
   </div>
-  <br>
-  <div>
-    <label for="password">パスワード:</label>
-    <input type="password" name="password" title="パスワードを入力してください" placeholder="パスワード" value="<%=@password%>" required>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">パスワード:</label>
+    <input type="password" name="password" id="password" class="form-control" title="パスワードを入力してください" placeholder="パスワード" value="<%= @password %>" required>
+    <div class="invalid-feedback">
+      パスワードを入力してください。
+    </div>
   </div>
-  <br>
-  <input type="submit" value="ユーザー新規登録">
+
+  <button type="submit" class="btn btn-primary btn-block">ユーザー新規登録</button>
 <% end %>

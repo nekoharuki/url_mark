@@ -1,20 +1,24 @@
-<h1>URL検索</h1>
+<h1 class="mb-4">URL検索</h1>
 
-<h2>タイトル  検索</h2>
-<%= form_tag("/urls/search_title") do %>
-  <div>
-    <label for="title">タイトル検索:</label>
-    <input type="text" name="title" title="タイトルを入力してください" placeholder="タイトル" required>
-    <input type="submit" value="送信">
+<h2 class="mb-3">タイトル検索</h2>
+<%= form_tag("/urls/search_title", class: "needs-validation", novalidate: true) do %>
+  <div class="mb-3">
+    <label for="title" class="form-label">タイトル検索:</label>
+    <input type="text" name="title" id="title" class="form-control" title="タイトルを入力してください" placeholder="タイトル" required>
+    <div class="invalid-feedback">
+      タイトルを入力してください。
+    </div>
   </div>
+  <button type="submit" class="btn btn-primary">送信</button>
 <% end %>
 
 <br>
 <br>
-<h2>ジャンル一覧</h2>
-<ul>
-<% @genres.each do |genre| %>
-  <li><%= link_to(genre.genre, "/urls/genres/#{genre.genre}") %></li>
-  <br>
-<% end %>
+<h2 class="mb-3">ジャンル一覧</h2>
+<ul class="list-group">
+  <% @genres.each do |genre| %>
+    <li class="list-group-item">
+      <%= link_to(genre.genre, "/urls/genres/#{genre.genre}", class: "text-decoration-none") %>
+    </li>
+  <% end %>
 </ul>

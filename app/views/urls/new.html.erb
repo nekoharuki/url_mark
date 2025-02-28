@@ -1,34 +1,37 @@
-<h1>URLの新規登録</h1>
+<h1 class="mb-4">URLの新規登録</h1>
 
-<%= form_tag("/urls/create") do %>
-
-  <div>
-    <label for="title">URLのタイトル:</label>
-    <input type="text" name="title" title="タイトルを入力してください" placeholder="タイトル" value="<%= @title %>" required>
+<%= form_tag("/urls/create", class: "needs-validation", novalidate: true) do %>
+  <div class="mb-3">
+    <label for="title" class="form-label">URLのタイトル:</label>
+    <input type="text" name="title" id="title" class="form-control" title="タイトルを入力してください" placeholder="タイトル" value="<%= @title %>" required>
+    <div class="invalid-feedback">
+      タイトルを入力してください。
+    </div>
   </div>
 
-  <br>
-
-  <div>
-    <label for="link">URL:</label>
-    <textarea name="link" title="URLを入力してください" required placeholder="URL" cols="150"><%= @link %></textarea>
+  <div class="mb-3">
+    <label for="link" class="form-label">URL:</label>
+    <textarea name="link" id="link" class="form-control" title="URLを入力してください" required placeholder="URL" rows="3"><%= @link %></textarea>
+    <div class="invalid-feedback">
+      URLを入力してください。
+    </div>
   </div>
 
-  <br>
-
-  <div>
-    <label for="genre">ジャンル:</label>
-    <input name="genre" title="ジャンルを入力してください" placeholder="ジャンル" value="<%= @genre %>" required>
+  <div class="mb-3">
+    <label for="genre" class="form-label">ジャンル:</label>
+    <input type="text" name="genre" id="genre" class="form-control" title="ジャンルを入力してください" placeholder="ジャンル" value="<%= @genre %>" required>
+    <div class="invalid-feedback">
+      ジャンルを入力してください。
+    </div>
   </div>
 
-  <br>
-
-  <div>
-    <label for="explanation">メモ:</label>
-    <textarea name="explanation" title="メモを入力してください" placeholder="メモ" rows="10" cols="150"><%= @explanation %></textarea>
+  <div class="mb-3">
+    <label for="explanation" class="form-label">メモ:</label>
+    <textarea name="explanation" id="explanation" class="form-control" title="メモを入力してください" placeholder="メモ" rows="5"><%= @explanation %></textarea>
+    <div class="invalid-feedback">
+      メモを入力してください。
+    </div>
   </div>
 
-  <br>
-
-  <input type="submit" value="URL新規登録">
+  <button type="submit" class="btn btn-primary">URL新規登録</button>
 <% end %>
