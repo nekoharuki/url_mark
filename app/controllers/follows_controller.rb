@@ -4,10 +4,10 @@ class FollowsController < ApplicationController
   before_action :follow_check
 
 def create
-  @follow=Follow.new(follower_user_id: @current_user.id, followed_user_id: params[:followed_user])
+  @follow=Follow.new(follower_user_id: @current_user.id, followed_user_id: params[:followed_user_id])
   if @follow.save
     flash[:notice]="フォロー登録できました"
-    redirect_to("/users/#{@follow.followed_user}/myurl")
+    redirect_to("/users/#{@follow.followed_user_id}/myurl")
   else
     flash[:alert]="フォロー登録に失敗しました"
     redirect_to("/urls/index")
@@ -15,11 +15,11 @@ def create
 end
 
   def destroy
-    @follow=Follow.find_by(follower_user_id: @current_user.id, followed_user_id: params[:followed_user])
+    @follow=Follow.find_by(follower_user_id: @current_user.id, followed_user_id: params[:followed_user_id])
     if @follow
       if @follow.destroy
         flash[:notice]="フォロー削除できました"
-        redirect_to("/users/#{@follow.followed_user}/myurl")
+        redirect_to("/users/#{@follow.followed_user_id}/myurl")
       else
         flash[:alert]="フォロー削除に失敗しました"
         redirect_to("/urls/index")
