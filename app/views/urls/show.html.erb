@@ -1,55 +1,54 @@
-<h1 class="mb-4">URLの詳細</h1>
+<br>
+<h1 class="mb-4 text-center">URLの詳細</h1>
 
-<div class="card">
-  <div class="card-body">
+<div class="card-body">
+  <div class="mb-3">
+    <span class="fw-semibold font-weight-bold">タイトル:</span>
+    <span class="text-muted"><%= @url.title %></span>
+  </div>
+
+  <div class="mb-3">
+    <span class="fw-semibold font-weight-bold">URL:</span>
+    <a href="<%= @url.link %>" class="d-block text-decoration-none text-info" target="_blank"><%= @url.link %></a>
+  </div>
+
+  <div class="mb-3">
+    <span class="fw-semibold font-weight-bold">ジャンル:</span>
+    <span class="text-muted"><%= @url.genre %></span>
+  </div>
+
+  <div class="mb-3">
+    <span class="fw-semibold font-weight-bold">作成者:</span>
+    <%= link_to(@url.user.name, "/users/#{@url.user_id}/myurl", class: "text-decoration-none text-primary fw-semibold") %>
+  </div>
+
+  <% if @url.explanation.present? %>
     <div class="mb-3">
-      <label for="title" class="form-label">URLのタイトル:</label>
-      <p class="form-control-plaintext"><%= @url.title %></p>
+      <span class="fw-semibold font-weight-bold">メモ:</span>
+      <p class="text-muted bg-light p-2 rounded"><%= @url.explanation %></p>
     </div>
+  <% end %>
 
-    <div class="mb-3">
-      <label for="link" class="form-label">URL:</label>
-      <p class="form-control-plaintext"><%= @url.link %></p>
-    </div>
-
-    <div class="mb-3">
-      <label for="genre" class="form-label">ジャンル:</label>
-      <p class="form-control-plaintext"><%= @url.genre %></p>
-    </div>
-
-    <div class="mb-3">
-      <label for="user" class="form-label">作成者:</label>
-      <p class="form-control-plaintext"><%= link_to(@url.user.name, "/users/#{@url.user_id}/myurl", class: "text-decoration-none") %></p>
-    </div>
-
-    <% if @url.explanation.present? %>
-      <div class="mb-3">
-        <label for="explanation" class="form-label">メモ:</label>
-        <p class="form-control-plaintext"><%= @url.explanation %></p>
-      </div>
-    <% end %>
-
-    <div class="mb-3">
-      <% if @url.user_id == @current_user.id %>
-        <% if Good.find_by(url_id: @url.id, user_id: @current_user.id) %>
-          <%= link_to("お気に入り削除", "/goods/#{@url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
-        <% else %>
-          <%= link_to("お気に入り登録", "/goods/#{@url.id}/create", data: { turbo_method: "post" }, class: "btn btn-success") %>
-        <% end %>
+  <div class="d-flex gap-2">
+    <% if @url.user_id == @current_user.id %>
+      <% if Good.find_by(url_id: @url.id, user_id: @current_user.id) %>
+        <%= link_to("お気に入り削除", "/goods/#{@url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
       <% else %>
-        <% if Like.find_by(url_id: @url.id, user_id: @current_user.id) %>
-          <%= link_to("いいね削除", "/likes/#{@url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
-        <% else %>
-          <%= link_to("いいね登録", "/likes/#{@url.id}/create", data: { turbo_method: "post" }, class: "btn btn-success") %>
-        <% end %>
+        <%= link_to("お気に入り登録", "/goods/#{@url.id}/create", data: { turbo_method: "post" }, class: "btn btn-danger") %>
       <% end %>
-    </div>
-
-    <% if @current_user.id == @url.user_id %>
-      <div class="mb-3">
-        <%= link_to("編集", "/urls/#{@url.id}/edit", class: "btn btn-warning") %>
-        <%= link_to("削除", "/urls/#{@url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
-      </div>
+    <% else %>
+      <% if Like.find_by(url_id: @url.id, user_id: @current_user.id) %>
+        <%= link_to("いいね削除", "/likes/#{@url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-outline-danger") %>
+      <% else %>
+        <%= link_to("いいね登録", "/likes/#{@url.id}/create", data: { turbo_method: "post" }, class: "btn btn-outline-success") %>
+      <% end %>
     <% end %>
   </div>
+
+  <% if @current_user.id == @url.user_id %>
+    <div class="d-flex gap-3 mt-3">
+      <%= link_to("編集", "/urls/#{@url.id}/edit", class: "btn btn-warning") %>
+      <%= link_to("削除", "/urls/#{@url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
+    </div>
+  <% end %>
 </div>
