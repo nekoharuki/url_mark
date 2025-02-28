@@ -12,6 +12,7 @@
           <%= link_to("自分のURL一覧", "/users/#{@current_user.id}/myurl", class: "nav-link text-dark", style: "font-weight: bold;") %>
           <%= link_to("URLいいね一覧", "/urls/like", class: "nav-link text-dark", style: "font-weight: bold;") %>
           <%= link_to("URLお気に入り一覧", "/urls/good", class: "nav-link text-dark", style: "font-weight: bold;") %>
+          <%= link_to("フォローしたユーザー", "/urls/follow", class: "nav-link text-dark", style: "font-weight: bold;") %>
           <%= link_to("ユーザー一覧", "/users/index", class: "nav-link text-dark", style: "font-weight: bold;") %>
           <%= link_to("ユーザー詳細", "/users/#{@current_user.id}", class: "nav-link text-dark", style: "font-weight: bold;") %>
           <%= link_to("URL検索", "/urls/search", class: "nav-link text-dark", style: "font-weight: bold;") %>
