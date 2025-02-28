@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   post "goods/:url_id/create" => "goods#create"
   post "goods/:url_id/destroy" => "goods#destroy"
 
+  post "follows/:followed_user_id/create" => "follows#create"
+  post "follows/:followed_user_id/destroy" => "follows#destroy"
+
   get "users/index" => "users#index"
   get "users/new" => "users#new"
   post "users/create" => "users#create"
@@ -21,6 +24,7 @@ Rails.application.routes.draw do
   get "urls/like" => "urls#like"
   get "urls/good" => "urls#good"
   get "urls/new" => "urls#new"
+  get "urls/follow" => "urls#follow"
   post "urls/create" => "urls#create"
   get "urls/genres/:genre" => "urls#genres"
   get "urls/search" => "urls#search"
