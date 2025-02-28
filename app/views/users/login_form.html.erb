@@ -1,19 +1,20 @@
-<h1>ログイン</h1>
+<h1 class="mb-4">ログイン</h1>
 
-<%= link_to "Login with Google", "/auth/google_oauth2", method: :post %>
-<%= link_to "Login with GitHub", "/auth/github", method: :post %>
+<div class="mb-3">
+  <%= link_to "Login with Google", "/auth/google_oauth2", method: :post, class: "btn btn-success" %>
+</div>
+<div class="mb-3">
+  <%= link_to "Login with GitHub", "/auth/github", method: :post, class: "btn btn-dark" %>
+</div>
 
-<%= form_tag("/login") do %>
-
-  <div>
-    <label for="email">メールアドレス:</label>
-    <input type="email" name="email"  title="メールアドレスを入力してください" placeholder="メールアドレス" value="<%=@email%>" required>
+<%= form_tag("/login", method: :post, class: "needs-validation") do %>
+  <div class="mb-3">
+    <label for="email" class="form-label">Eメール:</label>
+    <input type="email" class="form-control" name="email" id="email" title="メールアドレスを入力してください" placeholder="メールアドレス" value="<%= @email %>" required>
   </div>
-  <br>
-  <div>
-    <label for="password">パスワード:</label>
-    <input type="password" name="password"  title="パスワードを入力してください" placeholder="パスワード" value="<%=@password%>" required>
+  <div class="mb-3">
+    <label for="password" class="form-label">パスワード:</label>
+    <input type="password" class="form-control" name="password" id="password" title="パスワードを入力してください" placeholder="パスワード" value="<%= @password %>" minlength="5" required>
   </div>
-  <br>
-  <input type="submit" value="ログイン">
+  <button type="submit" class="btn btn-primary">ログイン</button>
 <% end %>

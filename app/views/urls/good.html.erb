@@ -1,10 +1,18 @@
-<h1>お気に入りURLの一覧</h1>
-<% @goods.each do |good| %>
-  <%url=Url.find_by(id: good.url_id)%>
-  <%= link_to(url.title, url.link) %>
-  <%= link_to("詳細へ", "/urls/#{url.id}") %>
-  <%= link_to("お気に入り削除 ", "/goods/#{url.id}/destroy",data: { turbo_method: "post" }) %>
+<h1 class="mb-4">お気に入りURLの一覧</h1>
 
-  <br>
-  <br>
-<% end %>
+<div class="row">
+  <% @goods.each do |good| %>
+    <% url = Url.find_by(id: good.url_id) %>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to(url.title, url.link, target: "_blank", class: "text-decoration-none") %></h5>
+          <p class="card-text">
+            <%= link_to("詳細へ", "/urls/#{url.id}", class: "btn btn-primary btn-sm") %>
+            <%= link_to("お気に入り削除", "/goods/#{url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger btn-sm") %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

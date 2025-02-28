@@ -1,48 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Bookmark" %></title>
+    <title>BUTUBUTU</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <ul>
-      <%if @current_user %>
-        <li><%= link_to("URL新規登録", "/urls/new") %></li>
-        <li><%= link_to("URL一覧", "/urls/index") %></li>
-        <li><%= link_to("自分のURL一覧", "/users/#{@current_user.id}/myurl") %></li>
-        <li><%= link_to("URLいいね一覧", "/urls/like") %></li>
-        <li><%= link_to("URLお気に入り一覧", "/urls/good") %></li>
-        <li><%= link_to("URL新規登録", "/urls/new") %></li>
-        <li><%= link_to("ユーザー一覧", "/users/index") %></li>
-        <li><%= link_to("ユーザー詳細", "/users/#{@current_user.id}") %></li>
-        <li><%= link_to("URL検索", "/urls/search") %></li>
-        <li><%= link_to("ログアウト", "/logout",data: { turbo_method: "post" }) %></li>
-      <%else%>
-        <li><%= link_to("ホーム", "/") %></li>
-        <li><%= link_to("このアプリについて", "/about") %></li>
-        <li><%= link_to("ユーザー新規登録", "/users/new") %></li>
-        <li><%= link_to("ログイン","/login")%></li>
-      <%end%>
-    </ul>
-  </head>
 
-  <body>
-    <% if flash[:notice] %>
-      <%= flash[:notice] %>
-    <% end %>
-    <% if flash[:alert] %>
-      <%= flash[:alert] %>
-    <% end %>
-    <%= yield %>
+  </head>
+    <body class="d-flex flex-column vh-100">
+
+    <%= render 'layouts/navbar' %>
+    
+    <%= render 'layouts/flash' %>
+
+    
+  <main class="container mt-5"">
+      <%= yield %>
+    </main>
+    <%= render 'layouts/footer' %>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -1,18 +1,23 @@
-<h1>ユーザー詳細</h1>
+<h1 class="mb-4 text-center">ユーザー詳細</h1>
 
-<div>
-  <label>名前:</label>
-  <%= @user.name %>
+<div class="card">
+  <div class="card-body">
+    <div class="mb-3">
+      <span class="fw-semibold font-weight-bold">名前:</span>
+      <p class="form-control-plaintext"><%= @user.name %></p>
+    </div>
+  
+    <div class="mb-3">
+      <span class="fw-semibold font-weight-bold">メールアドレス:</span>
+      <p class="form-control-plaintext"><%= @user.email %></p>
+    </div>
+    
+    <div class="mb-3">
+      <% if @current_user.id == @user.id %>
+        <%= link_to("編集", "/users/#{@user.id}/edit", class: "btn btn-success") %>
+        <%= link_to("削除", "/users/#{@user.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger") %>
+        <%= link_to("パスワード変更", "/users/#{@user.id}/password_change_form", class: "btn btn-success") %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<br>
-<div>
-  <label>メールアドレス:</label>
-  <%= @user.email %>
-</div>
-<br>
-
-<%if @current_user.id==@user.id%>
-  <%= link_to("編集", "/users/#{@user.id}/edit") %>
-  <%= link_to("削除", "/users/#{@user.id}/destroy", data: { turbo_method: "post" }) %>
-  <%= link_to("パスワード変更", "/users/#{@user.id}/password_change_form") %>
-<%end%>

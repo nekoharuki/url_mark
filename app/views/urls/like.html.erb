@@ -1,11 +1,18 @@
-<h1>いいねURLの一覧</h1>
+<h1 class="mb-4">いいねURLの一覧</h1>
 
-<% @likes.each do |like| %>
-  <%url=Url.find_by(id: like.url_id)%>
-  <%= link_to(url.title, url.link) %>
-  <%= link_to("詳細へ", "/urls/#{url.id}") %>
-  <%= link_to("いいね削除 ", "/likes/#{url.id}/destroy",data: { turbo_method: "post" }) %>
-
-  <br>
-  <br>
-<% end %>
+<div class="row">
+  <% @likes.each do |like| %>
+    <% url = Url.find_by(id: like.url_id) %>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to(url.title, url.link, target: "_blank", class: "text-decoration-none") %></h5>
+          <p class="card-text">
+            <%= link_to("詳細へ", "/urls/#{url.id}", class: "btn btn-primary btn-sm") %>
+            <%= link_to("いいね削除", "/likes/#{url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger btn-sm") %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

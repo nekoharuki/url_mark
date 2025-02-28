@@ -96,12 +96,17 @@ class UrlsController < ApplicationController
       @urls=Url.where(genre: params[:genre])
   end
   def search_title
-    @urls = Url.where("title LIKE ?", "%#{params[:title]}%")
-    if @urls.empty?
-      flash[:alert] = "該当するURLがありません"
-      redirect_to("/urls/genre")
+    if params[:title].blank?
+      flash[:alert] = "タイトルを入力してください"
+      redirect_to("/urls/search")
     else
-      redirect_to urls_search_result_path(title: params[:title])
+      @urls = Url.where("title LIKE ?", "%#{params[:title]}%")
+      if @urls.empty?
+        flash[:alert] = "該当するURLがありません"
+        redirect_to("/urls/search")
+      else
+        redirect_to urls_search_result_path(title: params[:title])
+      end
     end
   end
   def search_result
