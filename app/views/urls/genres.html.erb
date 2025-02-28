@@ -1,13 +1,21 @@
-<h1><%=@genre%>の一覧</h1>
+<h1 class="mb-4"><%= @genre %>の一覧</h1>
 
-<% @urls.each do |url| %>
-  <%= link_to(url.title, url.link) %>
-  <%= link_to("詳細へ", "/urls/#{url.id}") %>
-<%if Like.find_by(url_id: url.id, user_id: @current_user.id)%>
-  <%= link_to("お気に入り削除", "/likes/#{url.id}/destroy",data: { turbo_method: "post" }) %>
-<%else%>
-  <%= link_to("お気に入り登録", "/likes/#{url.id}/create",data: { turbo_method: "post" }) %>
-<%end%>
-  <br>
-  <br>
-<% end %>
+<div class="row">
+  <% @urls.each do |url| %>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to(url.title, url.link, target: "_blank", class: "text-decoration-none") %></h5>
+          <p class="card-text">
+            <%= link_to("詳細へ", "/urls/#{url.id}", class: "btn btn-primary btn-sm") %>
+            <% if Like.find_by(url_id: url.id, user_id: @current_user.id) %>
+              <%= link_to("お気に入り削除", "/likes/#{url.id}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger btn-sm") %>
+            <% else %>
+              <%= link_to("お気に入り登録", "/likes/#{url.id}/create", data: { turbo_method: "post" }, class: "btn btn-success btn-sm") %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

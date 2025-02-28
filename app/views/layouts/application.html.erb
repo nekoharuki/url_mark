@@ -15,34 +15,77 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <ul>
-      <%if @current_user %>
-        <li><%= link_to("URL新規登録", "/urls/new") %></li>
-        <li><%= link_to("URL一覧", "/urls/index") %></li>
-        <li><%= link_to("自分のURL一覧", "/users/#{@current_user.id}/myurl") %></li>
-        <li><%= link_to("URLいいね一覧", "/urls/like") %></li>
-        <li><%= link_to("URLお気に入り一覧", "/urls/good") %></li>
-        <li><%= link_to("URL新規登録", "/urls/new") %></li>
-        <li><%= link_to("ユーザー一覧", "/users/index") %></li>
-        <li><%= link_to("ユーザー詳細", "/users/#{@current_user.id}") %></li>
-        <li><%= link_to("URL検索", "/urls/search") %></li>
-        <li><%= link_to("ログアウト", "/logout",data: { turbo_method: "post" }) %></li>
-      <%else%>
-        <li><%= link_to("ホーム", "/") %></li>
-        <li><%= link_to("このアプリについて", "/about") %></li>
-        <li><%= link_to("ユーザー新規登録", "/users/new") %></li>
-        <li><%= link_to("ログイン","/login")%></li>
-      <%end%>
-    </ul>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JavaScript and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      .content {
+        flex: 1;
+      }
+    </style>
   </head>
 
   <body>
-    <% if flash[:notice] %>
-      <%= flash[:notice] %>
-    <% end %>
-    <% if flash[:alert] %>
-      <%= flash[:alert] %>
-    <% end %>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light" style="background-color: pink;">
+      <div class="container-fluid">
+        <a class="navbar-brand text-dark font-weight-bold">Bookmark</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <% if @current_user %>
+              <%= link_to("URL新規登録", "/urls/new", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("URL一覧", "/urls/index", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("自分のURL一覧", "/users/#{@current_user.id}/myurl", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("URLいいね一覧", "/urls/like", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("URLお気に入り一覧", "/urls/good", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("ユーザー一覧", "/users/index", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("ユーザー詳細", "/users/#{@current_user.id}", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("URL検索", "/urls/search", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("ログアウト", "/logout", data: { turbo_method: "post" }, class: "nav-link text-dark font-weight-bold") %>
+            <% else %>
+              <%= link_to("ホーム", "/", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("このアプリについて", "/about", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("ユーザー新規登録", "/users/new", class: "nav-link text-dark font-weight-bold") %>
+              <%= link_to("ログイン", "/login", class: "nav-link text-dark font-weight-bold") %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="content">
+      <% if flash[:notice] %>
+        <div class="alert alert-success" role="alert">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger" role="alert">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
+
+    <footer class="footer py-3 mt-auto text-center" style="background-color: pink;">
+      <div class="container">
+        <span class="text-muted">©Bookmark 2025</span>
+      </div>
+    </footer>
   </body>
 </html>
