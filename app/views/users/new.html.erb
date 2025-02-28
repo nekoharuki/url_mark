@@ -1,34 +1,25 @@
-<h1 class="mb-4">ユーザー新規登録</h1>
+<h1 class="mb-4">ユーザー情報登録</h1>
 
 <div class="mb-3">
-  <%= link_to "New with Google", "/auth/google_oauth2", method: :post, class: "btn btn-outline-primary btn-block mb-2" %>
-  <%= link_to "New with GitHub", "/auth/github", method: :post, class: "btn btn-outline-dark btn-block mb-4" %>
+  <%= link_to "New with Google", "/auth/google_oauth2", method: :post, class: "btn btn-success" %>
+</div>
+<div class="mb-3">
+  <%= link_to "New with GitHub", "/auth/github", method: :post, class: "btn btn-dark" %>
 </div>
 
-<%= form_tag("/users/create", class: "needs-validation", novalidate: true) do %>
+<%= form_tag("/users", method: :post, class: "needs-validation") do %>
   <div class="mb-3">
     <label for="name" class="form-label">名前:</label>
-    <input type="text" name="name" id="name" class="form-control" title="名前を入力してください" placeholder="名前" value="<%= @name %>" required>
-    <div class="invalid-feedback">
-      名前を入力してください。
-    </div>
+    <input type="text" class="form-control" name="name" id="name" title="名前を入力してください" value="<%= @name %>" placeholder="名前" required>
   </div>
-
   <div class="mb-3">
-    <label for="email" class="form-label">メールアドレス:</label>
-    <input type="email" name="email" id="email" class="form-control" title="メールアドレスを入力してください" placeholder="メールアドレス" value="<%= @email %>" required>
-    <div class="invalid-feedback">
-      メールアドレスを入力してください。
-    </div>
+    <label for="email" class="form-label">Eメール:</label>
+    <input type="email" class="form-control" name="email" id="email" title="メールアドレスを入力してください" value="<%= @email %>" placeholder="メールアドレス" required>
   </div>
-
-  <div class="mb-3">
-    <label for="password" class="form-label">パスワード:</label>
-    <input type="password" name="password" id="password" class="form-control" title="パスワードを入力してください" placeholder="パスワード" value="<%= @password %>" required>
-    <div class="invalid-feedback">
-      パスワードを入力してください。
-    </div>
-  </div>
-
-  <button type="submit" class="btn btn-primary btn-block">ユーザー新規登録</button>
+<div class="mb-3">
+  <label for="password" class="form-label">パスワード(5文字以上):</label>
+  <input type="password" class="form-control" name="password" id="password" title="パスワードを入力してください"  placeholder="パスワード"  value="<%= @password %>" minlength="5" required>
+</div>
+  <button type="submit" class="btn btn-primary">登録</button>
 <% end %>
+<br>
