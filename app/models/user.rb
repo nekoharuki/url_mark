@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :urls, dependent: :destroy
   has_many :goods, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :follows, dependent: :destroy
 
   def self.from_omniauth(auth)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)

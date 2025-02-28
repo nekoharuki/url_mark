@@ -88,6 +88,9 @@ class UrlsController < ApplicationController
   def good
       @goods=Good.where(user_id: @current_user.id)
   end
+  def follow
+      @follows=Follow.where(follower_user: @current_user.id)
+  end
   def search
       @genres=Url.select(:genre).distinct
   end
