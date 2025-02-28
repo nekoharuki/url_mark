@@ -1,9 +1,8 @@
-<h1 class="mb-4">URL検索</h1>
-
+<br>
 <h2 class="mb-3">タイトル検索</h2>
 <%= form_tag("/urls/search_title", class: "needs-validation", novalidate: true) do %>
   <div class="mb-3">
-    <label for="title" class="form-label">タイトル検索:</label>
+    <label for="title" class="form-label font-weight-bold">タイトル検索:</label>
     <input type="text" name="title" id="title" class="form-control" title="タイトルを入力してください" placeholder="タイトル" required>
     <div class="invalid-feedback">
       タイトルを入力してください。
