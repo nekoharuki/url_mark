@@ -30,7 +30,7 @@ class UsersController < ApplicationController
         render("users/new")
       end
     else
-      @user = User.new(name: params[:name], email: params[:email], password: params[:password])
+      @user = User.new(name: params[:name], email: params[:email], password: params[:password],image: params[:image])
       if @user.save
         session[:user_id]=@user.id
         flash[:notice] = "ユーザー登録に成功しました"

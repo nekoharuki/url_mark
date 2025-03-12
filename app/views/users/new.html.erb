@@ -7,7 +7,7 @@
   <%= link_to "New with GitHub", "/auth/github", method: :post, class: "btn btn-dark" %>
 </div>
 
-<%= form_tag("/users/create", {multipart: true},class: "needs-validation") do %>
+<%= form_tag("/users/create", multipart: true, class: "needs-validation") do %>
 
   <div class="mb-3">
     <label for="name" class="form-label">名前:</label>
