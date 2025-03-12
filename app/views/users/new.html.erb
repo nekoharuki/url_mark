@@ -20,6 +20,11 @@
   <label for="password" class="form-label">パスワード(5文字以上):</label>
   <input type="password" class="form-control" name="password" id="password" title="パスワードを入力してください"  placeholder="パスワード"  value="<%= @password %>" minlength="5" required>
 </div>
+<div class="mb-3">
+  <label for="image" class="form-label">プロフィール画像(任意):</label>
+  <input type="file" class="form-control" name="image" id="image" title="プロフィール画像を選択してください">
+</div>
+
   <button type="submit" class="btn btn-primary">登録</button>
 <% end %>
 <br>
