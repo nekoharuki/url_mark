@@ -16,23 +16,23 @@ class UsersController < ApplicationController
   end
 
   def create
-    exist_user=User.find_by(email: params[:email])
-    @name=params[:name]
-    @email=params[:email]
-    @password=params[:password]
+    exist_user = User.find_by(email: params[:email])
+    @name = params[:name]
+    @password = params[:password]
+    @image = params[:image]
     if exist_user
-      if exist_user && exist_user.authenticate(params[:password])
-        flash[:notice]="ログインに成功しました"
-        session[:user_id]=exist_user.id
+      if exist_user.authenticate(params[:password])
+        flash[:notice] = "ログインに成功しました"
+        session[:user_id] = exist_user.id
         redirect_to("/urls/index")
       else
-        flash[:alert]="そのメールアドレスはすでに登録されています"
+        flash[:alert] = "そのメールアドレスはすでに登録されています"
         render("users/new")
       end
     else
-      @user = User.new(name: params[:name], email: params[:email], password: params[:password],image: params[:image])
+      @user = User.new(name: params[:name], email: params[:email], password: params[:password], image: params[:image])
       if @user.save
-        session[:user_id]=@user.id
+        session[:user_id] = @user.id
         flash[:notice] = "ユーザー登録に成功しました"
         redirect_to("/urls/index")
       else
