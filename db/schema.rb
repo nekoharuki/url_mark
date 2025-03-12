@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_12_032520) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_12_043539) do
   create_table "follows", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_12_032520) do
     t.string "password_digest"
     t.string "provider"
     t.string "uid"
-    t.string "image_name"
+    t.string "image"
   end
 
   add_foreign_key "urls", "users"

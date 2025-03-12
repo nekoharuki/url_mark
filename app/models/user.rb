@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :follower_follows, class_name: 'Follow', foreign_key: 'follower_user_id', dependent: :destroy
   has_many :followed_follows, class_name: 'Follow', foreign_key: 'followed_user_id', dependent: :destroy
 
+  has_one_attached :image
+
   def self.from_omniauth(auth)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
     if user.new_record?
