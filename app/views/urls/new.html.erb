@@ -1,6 +1,6 @@
 <h1 class="mb-4">URLの新規登録</h1>
 
-<%= form_tag("/urls/create", class: "needs-validation", novalidate: true) do %>
+<%= form_tag("/urls/create", class: "needs-validation", novalidate: true,{multipart: true}) do %>
   <div class="mb-3">
     <label for="title" class="form-label" style="font-weight: bold;">URLのタイトル:</label>
     <input type="text" name="title" id="title" class="form-control" title="タイトルを入力してください" placeholder="タイトル" value="<%= @title %>" required>
@@ -32,6 +32,11 @@
       メモを入力してください。
     </div>
   </div>
+
+  <div class="mb-3">
+  <label for="image" class="form-label">画像:</label>
+  <input type="file" class="form-control" name="image" id="image" >
+</div>
 
   <button type="submit" class="btn btn-primary">URL新規登録</button>
   <br>

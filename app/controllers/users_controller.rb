@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     exist_user = User.find_by(email: params[:email])
     @name = params[:name]
     @password = params[:password]
-    @image = params[:image]
     if exist_user
       if exist_user.authenticate(params[:password])
         flash[:notice] = "ログインに成功しました"
@@ -30,7 +29,7 @@ class UsersController < ApplicationController
         render("users/new")
       end
     else
-      @user = User.new(name: params[:name], email: params[:email], password: params[:password], image: params[:image])
+      @user = User.new(name: params[:name], email: params[:email], password: params[:password])
       if @user.save
         session[:user_id] = @user.id
         flash[:notice] = "ユーザー登録に成功しました"

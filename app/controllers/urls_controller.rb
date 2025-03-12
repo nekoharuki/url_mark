@@ -45,12 +45,13 @@ class UrlsController < ApplicationController
   end
 
     def create
-      @url = Url.new(link: params[:link], title: params[:title], user_id: @current_user.id, genre: params[:genre], explanation: params[:explanation])
+      @url = Url.new(link: params[:link], title: params[:title], user_id: @current_user.id, genre: params[:genre],image: params[:image], explanation: params[:explanation])
+      @title=params[:title]
+      @link=params[:link]
+      @genre=params[:genre]
+      @explanation=params[:explanation]
+      @image=params[:image]
       if params[:link].blank? || params[:title].blank? || params[:genre].blank?
-        @title=params[:title]
-        @link=params[:link]
-        @genre=params[:genre]
-        @explanation=params[:explanation]
         flash[:alert] = "入力してください"
         render("urls/new")
       else
@@ -58,15 +59,12 @@ class UrlsController < ApplicationController
           flash[:notice] = "URLを登録に成功しました"
           redirect_to("/urls/index")
         else
-          @title=params[:title]
-          @link=params[:link]
-          @genre=params[:genre]
-          @explanation=params[:explanation]
           flash[:alert] = "URLの登録に失敗しました"
           render("urls/new")
         end
       end
     end
+  
   def destroy
     @url=Url.find_by(id: params[:id])
     if @url
