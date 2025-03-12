@@ -16,8 +16,10 @@ Rails.application.configure do
 
   # Enable server timing.
   config.server_timing = true
-  
+
   config.active_storage.service = :cloudinary
+
+  config.active_storage.default_url_options = { host: 'your-production-host.com' }
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

@@ -20,25 +20,25 @@ class UsersController < ApplicationController
     @name=params[:name]
     @email=params[:email]
     @password=params[:password]
-    @image_name = "default_user.jpg"
+
     if exist_user
       if exist_user && exist_user.authenticate(params[:password])
         flash[:notice]="ログインに成功しました"
         session[:user_id]=exist_user.id
-        redirect_to("/urls/index")
+        redirect_to("/urls/index") and return
       else
         flash[:alert]="そのメールアドレスはすでに登録されています"
-        render("users/new")
+        render("users/new") and return
       end
     else
-      @user = User.new(name: params[:name], email: params[:email], password: params[:password],image_name: @image_name)
+      @user = User.new(name: params[:name], email: params[:email], password: params[:password],image: params[:image])
       if @user.save
         session[:user_id]=@user.id
         flash[:notice] = "ユーザー登録に成功しました"
-        redirect_to("/urls/index")
+        redirect_to("/urls/index") and return
       else
         flash[:alert] = "ユーザー登録に失敗しました"
-        render("users/new")
+        render("users/new") and return
       end
     end
   end
